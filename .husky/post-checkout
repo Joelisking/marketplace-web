@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+if [ "$3" = 1 ]; then
+  if git diff-tree -r --name-only --no-commit-id $1 $2 | grep -E 'package(-lock)?\.json'; then
+    echo "Dependencies changed, running npm install..."
+    npm install
+  fi
+fi 

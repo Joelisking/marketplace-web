@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+commit_msg_file=$1
+commit_msg=$(cat $commit_msg_file)
+
+# Example: Require commit message to start with a type (feat|fix|chore|docs|refactor|test):
+if ! echo "$commit_msg" | grep -Eq '^(feat|fix|chore|docs|refactor|test)\:'; then
+  echo "\nERROR: Commit message must start with a valid type (feat|fix|chore|docs|refactor|test):"
+  echo "Example: feat: add new login feature"
+  exit 1
+fi 

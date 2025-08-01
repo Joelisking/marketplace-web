@@ -51,7 +51,7 @@ export const postOrders = (
     
     
     return axios.post(
-      `/orders`,
+      `http://localhost:4000/orders`,
       postOrdersBody,options
     );
   }
@@ -106,7 +106,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/orders`,{
+      `http://localhost:4000/orders`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -114,7 +114,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
 
 
 export const getGetOrdersQueryKey = (params?: GetOrdersParams,) => {
-    return [`/orders`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/orders`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -187,13 +187,13 @@ export const getOrdersOrderId = (
     
     
     return axios.get(
-      `/orders/${orderId}`,options
+      `http://localhost:4000/orders/${orderId}`,options
     );
   }
 
 
 export const getGetOrdersOrderIdQueryKey = (orderId: string,) => {
-    return [`/orders/${orderId}`] as const;
+    return [`http://localhost:4000/orders/${orderId}`] as const;
     }
 
     
@@ -267,7 +267,7 @@ export const deleteOrdersOrderId = (
     
     
     return axios.delete(
-      `/orders/${orderId}`,{data:
+      `http://localhost:4000/orders/${orderId}`,{data:
       deleteOrdersOrderIdBody, ...options}
     );
   }

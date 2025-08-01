@@ -54,7 +54,7 @@ export const getEnhancedCart = (
     
     
     return axios.get(
-      `/enhanced-cart`,{
+      `http://localhost:4000/enhanced-cart`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -62,7 +62,7 @@ export const getEnhancedCart = (
 
 
 export const getGetEnhancedCartQueryKey = (params?: GetEnhancedCartParams,) => {
-    return [`/enhanced-cart`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/enhanced-cart`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -135,7 +135,7 @@ export const postEnhancedCartItems = (
     
     
     return axios.post(
-      `/enhanced-cart/items`,
+      `http://localhost:4000/enhanced-cart/items`,
       postEnhancedCartItemsBody,options
     );
   }
@@ -191,7 +191,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.put(
-      `/enhanced-cart/items/${productId}`,
+      `http://localhost:4000/enhanced-cart/items/${productId}`,
       putEnhancedCartItemsProductIdBody,options
     );
   }
@@ -246,7 +246,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.delete(
-      `/enhanced-cart/items/${productId}`,options
+      `http://localhost:4000/enhanced-cart/items/${productId}`,options
     );
   }
 
@@ -300,7 +300,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.post(
-      `/enhanced-cart/sync`,
+      `http://localhost:4000/enhanced-cart/sync`,
       postEnhancedCartSyncBody,options
     );
   }
@@ -355,13 +355,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/enhanced-cart/stats`,options
+      `http://localhost:4000/enhanced-cart/stats`,options
     );
   }
 
 
 export const getGetEnhancedCartStatsQueryKey = () => {
-    return [`/enhanced-cart/stats`] as const;
+    return [`http://localhost:4000/enhanced-cart/stats`] as const;
     }
 
     

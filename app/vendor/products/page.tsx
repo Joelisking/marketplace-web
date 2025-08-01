@@ -1,7 +1,8 @@
 import React from 'react';
+import { ProductList } from '@/components/vendor/ProductList';
 
 function VendorProducts() {
-  return <div></div>;
+  return <ProductList />;
 }
 
 export default VendorProducts;

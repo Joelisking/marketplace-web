@@ -51,7 +51,7 @@ export const postCartItems = (
     
     
     return axios.post(
-      `/cart/items`,
+      `http://localhost:4000/cart/items`,
       postCartItemsBody,options
     );
   }
@@ -107,7 +107,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.put(
-      `/cart/items/${productId}`,
+      `http://localhost:4000/cart/items/${productId}`,
       putCartItemsProductIdBody,options
     );
   }
@@ -162,7 +162,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.delete(
-      `/cart/items/${productId}`,options
+      `http://localhost:4000/cart/items/${productId}`,options
     );
   }
 
@@ -216,13 +216,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/cart`,options
+      `http://localhost:4000/cart`,options
     );
   }
 
 
 export const getGetCartQueryKey = () => {
-    return [`/cart`] as const;
+    return [`http://localhost:4000/cart`] as const;
     }
 
     
@@ -295,7 +295,7 @@ export const deleteCart = (
     
     
     return axios.delete(
-      `/cart`,options
+      `http://localhost:4000/cart`,options
     );
   }
 

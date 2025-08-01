@@ -36,6 +36,11 @@ import type {
   GetAuthMe401,
   GetAuthMe404,
   GetAuthUsers200Item,
+  PatchAuthMe200,
+  PatchAuthMe400,
+  PatchAuthMe401,
+  PatchAuthMe404,
+  PatchAuthMeBody,
   PostAuthLogin201,
   PostAuthLoginBody,
   PostAuthRefresh200,
@@ -55,7 +60,7 @@ export const postAuthRegister = (
     
     
     return axios.post(
-      `/auth/register`,
+      `http://localhost:4000/auth/register`,
       postAuthRegisterBody,options
     );
   }
@@ -110,7 +115,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.post(
-      `/auth/login`,
+      `http://localhost:4000/auth/login`,
       postAuthLoginBody,options
     );
   }
@@ -165,7 +170,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.post(
-      `/auth/refresh`,
+      `http://localhost:4000/auth/refresh`,
       postAuthRefreshBody,options
     );
   }
@@ -220,13 +225,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/auth/users`,options
+      `http://localhost:4000/auth/users`,options
     );
   }
 
 
 export const getGetAuthUsersQueryKey = () => {
-    return [`/auth/users`] as const;
+    return [`http://localhost:4000/auth/users`] as const;
     }
 
     
@@ -299,13 +304,13 @@ export const getAuthMe = (
     
     
     return axios.get(
-      `/auth/me`,options
+      `http://localhost:4000/auth/me`,options
     );
   }
 
 
 export const getGetAuthMeQueryKey = () => {
-    return [`/auth/me`] as const;
+    return [`http://localhost:4000/auth/me`] as const;
     }
 
     
@@ -372,3 +377,59 @@ export function useGetAuthMe<TData = Awaited<ReturnType<typeof getAuthMe>>, TErr
 
 
 
+export const patchAuthMe = (
+    patchAuthMeBody: PatchAuthMeBody, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<PatchAuthMe200>> => {
+    
+    
+    return axios.patch(
+      `http://localhost:4000/auth/me`,
+      patchAuthMeBody,options
+    );
+  }
+
+
+
+export const getPatchAuthMeMutationOptions = <TError = AxiosError<PatchAuthMe400 | PatchAuthMe401 | PatchAuthMe404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchAuthMe>>, TError,{data: PatchAuthMeBody}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof patchAuthMe>>, TError,{data: PatchAuthMeBody}, TContext> => {
+
+const mutationKey = ['patchAuthMe'];
+const {mutation: mutationOptions, axios: axiosOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, axios: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchAuthMe>>, {data: PatchAuthMeBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  patchAuthMe(data,axiosOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchAuthMeMutationResult = NonNullable<Awaited<ReturnType<typeof patchAuthMe>>>
+    export type PatchAuthMeMutationBody = PatchAuthMeBody
+    export type PatchAuthMeMutationError = AxiosError<PatchAuthMe400 | PatchAuthMe401 | PatchAuthMe404>
+
+    export const usePatchAuthMe = <TError = AxiosError<PatchAuthMe400 | PatchAuthMe401 | PatchAuthMe404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchAuthMe>>, TError,{data: PatchAuthMeBody}, TContext>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchAuthMe>>,
+        TError,
+        {data: PatchAuthMeBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchAuthMeMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    

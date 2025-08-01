@@ -32,6 +32,7 @@ import type {
 } from 'axios';
 
 import type {
+  DeleteVendorOnboardingDocumentsDocumentId200,
   DeleteVendorProductsProductIdImagesImageId401,
   DeleteVendorProductsProductIdImagesImageId403,
   DeleteVendorProductsProductIdImagesImageId404,
@@ -43,6 +44,7 @@ import type {
   GetVendorDashboard404,
   GetVendorMetrics200,
   GetVendorMetricsParams,
+  GetVendorOnboardingDocuments200,
   GetVendorOrdersOrderIdTracking200,
   GetVendorOrdersOrderIdTracking401,
   GetVendorOrdersOrderIdTracking403,
@@ -66,6 +68,12 @@ import type {
   GetVendorProductsProductIdImages403,
   GetVendorProductsStats200,
   GetVendorStore200,
+  PostVendorOnboardingApplication201,
+  PostVendorOnboardingApplicationBody,
+  PostVendorOnboardingDocuments201,
+  PostVendorOnboardingDocumentsBody,
+  PostVendorOnboardingUploadUrl200,
+  PostVendorOnboardingUploadUrlBody,
   PostVendorOrdersOrderIdDelivered200,
   PostVendorOrdersOrderIdDelivered401,
   PostVendorOrdersOrderIdDelivered403,
@@ -81,6 +89,11 @@ import type {
   PostVendorPaymentAccount401,
   PostVendorPaymentAccount403,
   PostVendorPaymentAccountBody,
+  PostVendorPaymentAccountFromApplication200,
+  PostVendorPaymentAccountFromApplication400,
+  PostVendorPaymentAccountFromApplication401,
+  PostVendorPaymentAccountFromApplication404,
+  PostVendorPaymentAccountFromApplicationBody,
   PostVendorProductsProductIdImages201,
   PostVendorProductsProductIdImages401,
   PostVendorProductsProductIdImages403,
@@ -117,13 +130,13 @@ export const getVendorDashboard = (
     
     
     return axios.get(
-      `/vendor/dashboard`,options
+      `http://localhost:4000/vendor/dashboard`,options
     );
   }
 
 
 export const getGetVendorDashboardQueryKey = () => {
-    return [`/vendor/dashboard`] as const;
+    return [`http://localhost:4000/vendor/dashboard`] as const;
     }
 
     
@@ -196,13 +209,13 @@ export const getVendorProductsStats = (
     
     
     return axios.get(
-      `/vendor/products/stats`,options
+      `http://localhost:4000/vendor/products/stats`,options
     );
   }
 
 
 export const getGetVendorProductsStatsQueryKey = () => {
-    return [`/vendor/products/stats`] as const;
+    return [`http://localhost:4000/vendor/products/stats`] as const;
     }
 
     
@@ -275,13 +288,13 @@ export const getVendorStore = (
     
     
     return axios.get(
-      `/vendor/store`,options
+      `http://localhost:4000/vendor/store`,options
     );
   }
 
 
 export const getGetVendorStoreQueryKey = () => {
-    return [`/vendor/store`] as const;
+    return [`http://localhost:4000/vendor/store`] as const;
     }
 
     
@@ -354,7 +367,7 @@ export const putVendorStore = (
     
     
     return axios.put(
-      `/vendor/store`,
+      `http://localhost:4000/vendor/store`,
       putVendorStoreBody,options
     );
   }
@@ -409,13 +422,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/vendor/products`,options
+      `http://localhost:4000/vendor/products`,options
     );
   }
 
 
 export const getGetVendorProductsQueryKey = () => {
-    return [`/vendor/products`] as const;
+    return [`http://localhost:4000/vendor/products`] as const;
     }
 
     
@@ -488,13 +501,13 @@ export const getVendorProductsBestSellers = (
     
     
     return axios.get(
-      `/vendor/products/best-sellers`,options
+      `http://localhost:4000/vendor/products/best-sellers`,options
     );
   }
 
 
 export const getGetVendorProductsBestSellersQueryKey = () => {
-    return [`/vendor/products/best-sellers`] as const;
+    return [`http://localhost:4000/vendor/products/best-sellers`] as const;
     }
 
     
@@ -567,7 +580,7 @@ export const getVendorAnalytics = (
     
     
     return axios.get(
-      `/vendor/analytics`,{
+      `http://localhost:4000/vendor/analytics`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -575,7 +588,7 @@ export const getVendorAnalytics = (
 
 
 export const getGetVendorAnalyticsQueryKey = (params?: GetVendorAnalyticsParams,) => {
-    return [`/vendor/analytics`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/analytics`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -648,7 +661,7 @@ export const getVendorPerformance = (
     
     
     return axios.get(
-      `/vendor/performance`,{
+      `http://localhost:4000/vendor/performance`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -656,7 +669,7 @@ export const getVendorPerformance = (
 
 
 export const getGetVendorPerformanceQueryKey = (params?: GetVendorPerformanceParams,) => {
-    return [`/vendor/performance`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/performance`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -730,7 +743,7 @@ export const putVendorOrdersOrderIdTracking = (
     
     
     return axios.put(
-      `/vendor/orders/${orderId}/tracking`,
+      `http://localhost:4000/vendor/orders/${orderId}/tracking`,
       putVendorOrdersOrderIdTrackingBody,options
     );
   }
@@ -785,13 +798,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/vendor/orders/${orderId}/tracking`,options
+      `http://localhost:4000/vendor/orders/${orderId}/tracking`,options
     );
   }
 
 
 export const getGetVendorOrdersOrderIdTrackingQueryKey = (orderId: string,) => {
-    return [`/vendor/orders/${orderId}/tracking`] as const;
+    return [`http://localhost:4000/vendor/orders/${orderId}/tracking`] as const;
     }
 
     
@@ -865,7 +878,7 @@ export const postVendorOrdersOrderIdPickedUp = (
     
     
     return axios.post(
-      `/vendor/orders/${orderId}/picked-up`,
+      `http://localhost:4000/vendor/orders/${orderId}/picked-up`,
       postVendorOrdersOrderIdPickedUpBody,options
     );
   }
@@ -920,7 +933,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.post(
-      `/vendor/orders/${orderId}/out-for-delivery`,undefined,options
+      `http://localhost:4000/vendor/orders/${orderId}/out-for-delivery`,undefined,options
     );
   }
 
@@ -974,7 +987,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.post(
-      `/vendor/orders/${orderId}/delivered`,undefined,options
+      `http://localhost:4000/vendor/orders/${orderId}/delivered`,undefined,options
     );
   }
 
@@ -1028,7 +1041,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.post(
-      `/vendor/payment/account`,
+      `http://localhost:4000/vendor/payment/account`,
       postVendorPaymentAccountBody,options
     );
   }
@@ -1077,13 +1090,68 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
 
       return useMutation(mutationOptions , queryClient);
     }
+    export const postVendorPaymentAccountFromApplication = (
+    postVendorPaymentAccountFromApplicationBody: PostVendorPaymentAccountFromApplicationBody, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<PostVendorPaymentAccountFromApplication200>> => {
+    
+    
+    return axios.post(
+      `http://localhost:4000/vendor/payment/account/from-application`,
+      postVendorPaymentAccountFromApplicationBody,options
+    );
+  }
+
+
+
+export const getPostVendorPaymentAccountFromApplicationMutationOptions = <TError = AxiosError<PostVendorPaymentAccountFromApplication400 | PostVendorPaymentAccountFromApplication401 | PostVendorPaymentAccountFromApplication404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorPaymentAccountFromApplication>>, TError,{data: PostVendorPaymentAccountFromApplicationBody}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof postVendorPaymentAccountFromApplication>>, TError,{data: PostVendorPaymentAccountFromApplicationBody}, TContext> => {
+
+const mutationKey = ['postVendorPaymentAccountFromApplication'];
+const {mutation: mutationOptions, axios: axiosOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, axios: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postVendorPaymentAccountFromApplication>>, {data: PostVendorPaymentAccountFromApplicationBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postVendorPaymentAccountFromApplication(data,axiosOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostVendorPaymentAccountFromApplicationMutationResult = NonNullable<Awaited<ReturnType<typeof postVendorPaymentAccountFromApplication>>>
+    export type PostVendorPaymentAccountFromApplicationMutationBody = PostVendorPaymentAccountFromApplicationBody
+    export type PostVendorPaymentAccountFromApplicationMutationError = AxiosError<PostVendorPaymentAccountFromApplication400 | PostVendorPaymentAccountFromApplication401 | PostVendorPaymentAccountFromApplication404>
+
+    export const usePostVendorPaymentAccountFromApplication = <TError = AxiosError<PostVendorPaymentAccountFromApplication400 | PostVendorPaymentAccountFromApplication401 | PostVendorPaymentAccountFromApplication404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorPaymentAccountFromApplication>>, TError,{data: PostVendorPaymentAccountFromApplicationBody}, TContext>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postVendorPaymentAccountFromApplication>>,
+        TError,
+        {data: PostVendorPaymentAccountFromApplicationBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostVendorPaymentAccountFromApplicationMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
     export const getVendorPaymentEarnings = (
     params?: GetVendorPaymentEarningsParams, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<GetVendorPaymentEarnings200>> => {
     
     
     return axios.get(
-      `/vendor/payment/earnings`,{
+      `http://localhost:4000/vendor/payment/earnings`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -1091,7 +1159,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
 
 
 export const getGetVendorPaymentEarningsQueryKey = (params?: GetVendorPaymentEarningsParams,) => {
-    return [`/vendor/payment/earnings`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/payment/earnings`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -1164,7 +1232,7 @@ export const getVendorPaymentPayoutsHistory = (
     
     
     return axios.get(
-      `/vendor/payment/payouts/history`,{
+      `http://localhost:4000/vendor/payment/payouts/history`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -1172,7 +1240,7 @@ export const getVendorPaymentPayoutsHistory = (
 
 
 export const getGetVendorPaymentPayoutsHistoryQueryKey = (params?: GetVendorPaymentPayoutsHistoryParams,) => {
-    return [`/vendor/payment/payouts/history`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/payment/payouts/history`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -1245,7 +1313,7 @@ export const getVendorMetrics = (
     
     
     return axios.get(
-      `/vendor/metrics`,{
+      `http://localhost:4000/vendor/metrics`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -1253,7 +1321,7 @@ export const getVendorMetrics = (
 
 
 export const getGetVendorMetricsQueryKey = (params?: GetVendorMetricsParams,) => {
-    return [`/vendor/metrics`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/metrics`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -1327,7 +1395,7 @@ export const postVendorProductsProductIdImages = (
     
     
     return axios.post(
-      `/vendor/products/${productId}/images`,
+      `http://localhost:4000/vendor/products/${productId}/images`,
       postVendorProductsProductIdImagesBodyItem,options
     );
   }
@@ -1382,13 +1450,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/vendor/products/${productId}/images`,options
+      `http://localhost:4000/vendor/products/${productId}/images`,options
     );
   }
 
 
 export const getGetVendorProductsProductIdImagesQueryKey = (productId: string,) => {
-    return [`/vendor/products/${productId}/images`] as const;
+    return [`http://localhost:4000/vendor/products/${productId}/images`] as const;
     }
 
     
@@ -1463,7 +1531,7 @@ export const putVendorProductsProductIdImagesImageId = (
     
     
     return axios.put(
-      `/vendor/products/${productId}/images/${imageId}`,
+      `http://localhost:4000/vendor/products/${productId}/images/${imageId}`,
       putVendorProductsProductIdImagesImageIdBody,options
     );
   }
@@ -1519,7 +1587,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.delete(
-      `/vendor/products/${productId}/images/${imageId}`,options
+      `http://localhost:4000/vendor/products/${productId}/images/${imageId}`,options
     );
   }
 
@@ -1574,7 +1642,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.put(
-      `/vendor/products/${productId}/images/reorder`,
+      `http://localhost:4000/vendor/products/${productId}/images/reorder`,
       putVendorProductsProductIdImagesReorderBody,options
     );
   }
@@ -1620,6 +1688,304 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
       > => {
 
       const mutationOptions = getPutVendorProductsProductIdImagesReorderMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    export const postVendorOnboardingApplication = (
+    postVendorOnboardingApplicationBody: PostVendorOnboardingApplicationBody, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<PostVendorOnboardingApplication201>> => {
+    
+    
+    return axios.post(
+      `http://localhost:4000/vendor-onboarding/application`,
+      postVendorOnboardingApplicationBody,options
+    );
+  }
+
+
+
+export const getPostVendorOnboardingApplicationMutationOptions = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingApplication>>, TError,{data: PostVendorOnboardingApplicationBody}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingApplication>>, TError,{data: PostVendorOnboardingApplicationBody}, TContext> => {
+
+const mutationKey = ['postVendorOnboardingApplication'];
+const {mutation: mutationOptions, axios: axiosOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, axios: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postVendorOnboardingApplication>>, {data: PostVendorOnboardingApplicationBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postVendorOnboardingApplication(data,axiosOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostVendorOnboardingApplicationMutationResult = NonNullable<Awaited<ReturnType<typeof postVendorOnboardingApplication>>>
+    export type PostVendorOnboardingApplicationMutationBody = PostVendorOnboardingApplicationBody
+    export type PostVendorOnboardingApplicationMutationError = AxiosError<void>
+
+    export const usePostVendorOnboardingApplication = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingApplication>>, TError,{data: PostVendorOnboardingApplicationBody}, TContext>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postVendorOnboardingApplication>>,
+        TError,
+        {data: PostVendorOnboardingApplicationBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostVendorOnboardingApplicationMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    export const postVendorOnboardingDocuments = (
+    postVendorOnboardingDocumentsBody: PostVendorOnboardingDocumentsBody, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<PostVendorOnboardingDocuments201>> => {
+    
+    
+    return axios.post(
+      `http://localhost:4000/vendor-onboarding/documents`,
+      postVendorOnboardingDocumentsBody,options
+    );
+  }
+
+
+
+export const getPostVendorOnboardingDocumentsMutationOptions = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingDocuments>>, TError,{data: PostVendorOnboardingDocumentsBody}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingDocuments>>, TError,{data: PostVendorOnboardingDocumentsBody}, TContext> => {
+
+const mutationKey = ['postVendorOnboardingDocuments'];
+const {mutation: mutationOptions, axios: axiosOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, axios: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postVendorOnboardingDocuments>>, {data: PostVendorOnboardingDocumentsBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postVendorOnboardingDocuments(data,axiosOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostVendorOnboardingDocumentsMutationResult = NonNullable<Awaited<ReturnType<typeof postVendorOnboardingDocuments>>>
+    export type PostVendorOnboardingDocumentsMutationBody = PostVendorOnboardingDocumentsBody
+    export type PostVendorOnboardingDocumentsMutationError = AxiosError<void>
+
+    export const usePostVendorOnboardingDocuments = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingDocuments>>, TError,{data: PostVendorOnboardingDocumentsBody}, TContext>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postVendorOnboardingDocuments>>,
+        TError,
+        {data: PostVendorOnboardingDocumentsBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostVendorOnboardingDocumentsMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    export const getVendorOnboardingDocuments = (
+     options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<GetVendorOnboardingDocuments200>> => {
+    
+    
+    return axios.get(
+      `http://localhost:4000/vendor-onboarding/documents`,options
+    );
+  }
+
+
+export const getGetVendorOnboardingDocumentsQueryKey = () => {
+    return [`http://localhost:4000/vendor-onboarding/documents`] as const;
+    }
+
+    
+export const getGetVendorOnboardingDocumentsQueryOptions = <TData = Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError = AxiosError<void>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError, TData>>, axios?: AxiosRequestConfig}
+) => {
+
+const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetVendorOnboardingDocumentsQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>> = ({ signal }) => getVendorOnboardingDocuments({ signal, ...axiosOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetVendorOnboardingDocumentsQueryResult = NonNullable<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>>
+export type GetVendorOnboardingDocumentsQueryError = AxiosError<void>
+
+
+export function useGetVendorOnboardingDocuments<TData = Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError = AxiosError<void>>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getVendorOnboardingDocuments>>,
+          TError,
+          Awaited<ReturnType<typeof getVendorOnboardingDocuments>>
+        > , 'initialData'
+      >, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetVendorOnboardingDocuments<TData = Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError = AxiosError<void>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getVendorOnboardingDocuments>>,
+          TError,
+          Awaited<ReturnType<typeof getVendorOnboardingDocuments>>
+        > , 'initialData'
+      >, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetVendorOnboardingDocuments<TData = Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError = AxiosError<void>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError, TData>>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useGetVendorOnboardingDocuments<TData = Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError = AxiosError<void>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOnboardingDocuments>>, TError, TData>>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetVendorOnboardingDocumentsQueryOptions(options)
+
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+export const deleteVendorOnboardingDocumentsDocumentId = (
+    documentId: string, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<DeleteVendorOnboardingDocumentsDocumentId200>> => {
+    
+    
+    return axios.delete(
+      `http://localhost:4000/vendor-onboarding/documents/${documentId}`,options
+    );
+  }
+
+
+
+export const getDeleteVendorOnboardingDocumentsDocumentIdMutationOptions = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteVendorOnboardingDocumentsDocumentId>>, TError,{documentId: string}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteVendorOnboardingDocumentsDocumentId>>, TError,{documentId: string}, TContext> => {
+
+const mutationKey = ['deleteVendorOnboardingDocumentsDocumentId'];
+const {mutation: mutationOptions, axios: axiosOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, axios: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteVendorOnboardingDocumentsDocumentId>>, {documentId: string}> = (props) => {
+          const {documentId} = props ?? {};
+
+          return  deleteVendorOnboardingDocumentsDocumentId(documentId,axiosOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteVendorOnboardingDocumentsDocumentIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteVendorOnboardingDocumentsDocumentId>>>
+    
+    export type DeleteVendorOnboardingDocumentsDocumentIdMutationError = AxiosError<void>
+
+    export const useDeleteVendorOnboardingDocumentsDocumentId = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteVendorOnboardingDocumentsDocumentId>>, TError,{documentId: string}, TContext>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteVendorOnboardingDocumentsDocumentId>>,
+        TError,
+        {documentId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteVendorOnboardingDocumentsDocumentIdMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    export const postVendorOnboardingUploadUrl = (
+    postVendorOnboardingUploadUrlBody: PostVendorOnboardingUploadUrlBody, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<PostVendorOnboardingUploadUrl200>> => {
+    
+    
+    return axios.post(
+      `http://localhost:4000/vendor-onboarding/upload-url`,
+      postVendorOnboardingUploadUrlBody,options
+    );
+  }
+
+
+
+export const getPostVendorOnboardingUploadUrlMutationOptions = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingUploadUrl>>, TError,{data: PostVendorOnboardingUploadUrlBody}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingUploadUrl>>, TError,{data: PostVendorOnboardingUploadUrlBody}, TContext> => {
+
+const mutationKey = ['postVendorOnboardingUploadUrl'];
+const {mutation: mutationOptions, axios: axiosOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, axios: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postVendorOnboardingUploadUrl>>, {data: PostVendorOnboardingUploadUrlBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postVendorOnboardingUploadUrl(data,axiosOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostVendorOnboardingUploadUrlMutationResult = NonNullable<Awaited<ReturnType<typeof postVendorOnboardingUploadUrl>>>
+    export type PostVendorOnboardingUploadUrlMutationBody = PostVendorOnboardingUploadUrlBody
+    export type PostVendorOnboardingUploadUrlMutationError = AxiosError<void>
+
+    export const usePostVendorOnboardingUploadUrl = <TError = AxiosError<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postVendorOnboardingUploadUrl>>, TError,{data: PostVendorOnboardingUploadUrlBody}, TContext>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postVendorOnboardingUploadUrl>>,
+        TError,
+        {data: PostVendorOnboardingUploadUrlBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostVendorOnboardingUploadUrlMutationOptions(options);
 
       return useMutation(mutationOptions , queryClient);
     }

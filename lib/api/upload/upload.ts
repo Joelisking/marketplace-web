@@ -45,7 +45,7 @@ export const postUploadPresignedUrl = (
     
     
     return axios.post(
-      `/upload/presigned-url`,
+      `http://localhost:4000/upload/presigned-url`,
       postUploadPresignedUrlBody,options
     );
   }
@@ -100,7 +100,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.delete(
-      `/upload/delete`,{data:
+      `http://localhost:4000/upload/delete`,{data:
       deleteUploadDeleteBody, ...options}
     );
   }

@@ -48,7 +48,7 @@ export const getSuperSystemOverview = (
     
     
     return axios.get(
-      `/super/system/overview`,{
+      `http://localhost:4000/super/system/overview`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -56,7 +56,7 @@ export const getSuperSystemOverview = (
 
 
 export const getGetSuperSystemOverviewQueryKey = (params?: GetSuperSystemOverviewParams,) => {
-    return [`/super/system/overview`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/super/system/overview`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -129,7 +129,7 @@ export const getSuperVendors = (
     
     
     return axios.get(
-      `/super/vendors`,{
+      `http://localhost:4000/super/vendors`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -137,7 +137,7 @@ export const getSuperVendors = (
 
 
 export const getGetSuperVendorsQueryKey = (params?: GetSuperVendorsParams,) => {
-    return [`/super/vendors`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/super/vendors`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -210,7 +210,7 @@ export const getSuperPaymentsOverview = (
     
     
     return axios.get(
-      `/super/payments/overview`,{
+      `http://localhost:4000/super/payments/overview`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -218,7 +218,7 @@ export const getSuperPaymentsOverview = (
 
 
 export const getGetSuperPaymentsOverviewQueryKey = (params?: GetSuperPaymentsOverviewParams,) => {
-    return [`/super/payments/overview`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/super/payments/overview`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -291,13 +291,13 @@ export const getSuperVendorsVendorId = (
     
     
     return axios.get(
-      `/super/vendors/${vendorId}`,options
+      `http://localhost:4000/super/vendors/${vendorId}`,options
     );
   }
 
 
 export const getGetSuperVendorsVendorIdQueryKey = (vendorId: string,) => {
-    return [`/super/vendors/${vendorId}`] as const;
+    return [`http://localhost:4000/super/vendors/${vendorId}`] as const;
     }
 
     
@@ -370,13 +370,13 @@ export const getSuperAnalytics = (
     
     
     return axios.get(
-      `/super/analytics`,options
+      `http://localhost:4000/super/analytics`,options
     );
   }
 
 
 export const getGetSuperAnalyticsQueryKey = () => {
-    return [`/super/analytics`] as const;
+    return [`http://localhost:4000/super/analytics`] as const;
     }
 
     

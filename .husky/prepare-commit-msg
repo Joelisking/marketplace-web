@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+MSG_FILE=$1
+
+# Only prepend if not a merge commit
+if [ -z "$2" ]; then
+  sed -i.bak -e "1s/^/[$BRANCH_NAME] /" "$MSG_FILE"
+fi 

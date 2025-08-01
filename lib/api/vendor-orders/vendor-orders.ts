@@ -51,7 +51,7 @@ export const patchVendorOrdersOrderIdStatus = (
     
     
     return axios.patch(
-      `/vendor/orders/${orderId}/status`,
+      `http://localhost:4000/vendor/orders/${orderId}/status`,
       patchVendorOrdersOrderIdStatusBody,options
     );
   }
@@ -106,7 +106,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/vendor/orders`,{
+      `http://localhost:4000/vendor/orders`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -114,7 +114,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
 
 
 export const getGetVendorOrdersQueryKey = (params?: GetVendorOrdersParams,) => {
-    return [`/vendor/orders`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/orders`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -187,7 +187,7 @@ export const getVendorOrdersStats = (
     
     
     return axios.get(
-      `/vendor/orders/stats`,{
+      `http://localhost:4000/vendor/orders/stats`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -195,7 +195,7 @@ export const getVendorOrdersStats = (
 
 
 export const getGetVendorOrdersStatsQueryKey = (params?: GetVendorOrdersStatsParams,) => {
-    return [`/vendor/orders/stats`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/vendor/orders/stats`, ...(params ? [params]: [])] as const;
     }
 
     

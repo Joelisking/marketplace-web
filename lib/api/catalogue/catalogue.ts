@@ -80,7 +80,7 @@ export const getProducts = (
     
     
     return axios.get(
-      `/products`,{
+      `http://localhost:4000/products`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -88,7 +88,7 @@ export const getProducts = (
 
 
 export const getGetProductsQueryKey = (params?: GetProductsParams,) => {
-    return [`/products`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/products`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -161,7 +161,7 @@ export const postProducts = (
     
     
     return axios.post(
-      `/products`,
+      `http://localhost:4000/products`,
       postProductsBody,options
     );
   }
@@ -216,13 +216,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/products/${id}`,options
+      `http://localhost:4000/products/${id}`,options
     );
   }
 
 
 export const getGetProductsIdQueryKey = (id: string,) => {
-    return [`/products/${id}`] as const;
+    return [`http://localhost:4000/products/${id}`] as const;
     }
 
     
@@ -296,7 +296,7 @@ export const putProductsId = (
     
     
     return axios.put(
-      `/products/${id}`,
+      `http://localhost:4000/products/${id}`,
       putProductsIdBody,options
     );
   }
@@ -351,7 +351,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.delete(
-      `/products/${id}`,options
+      `http://localhost:4000/products/${id}`,options
     );
   }
 
@@ -405,7 +405,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/stores`,{
+      `http://localhost:4000/stores`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -413,7 +413,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
 
 
 export const getGetStoresQueryKey = (params?: GetStoresParams,) => {
-    return [`/stores`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/stores`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -486,7 +486,7 @@ export const postStores = (
     
     
     return axios.post(
-      `/stores`,
+      `http://localhost:4000/stores`,
       postStoresBody,options
     );
   }
@@ -541,13 +541,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/stores/${slug}`,options
+      `http://localhost:4000/stores/${slug}`,options
     );
   }
 
 
 export const getGetStoresSlugQueryKey = (slug: string,) => {
-    return [`/stores/${slug}`] as const;
+    return [`http://localhost:4000/stores/${slug}`] as const;
     }
 
     
@@ -621,7 +621,7 @@ export const putStoresSlug = (
     
     
     return axios.put(
-      `/stores/${slug}`,
+      `http://localhost:4000/stores/${slug}`,
       putStoresSlugBody,options
     );
   }
@@ -676,7 +676,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.delete(
-      `/stores/${slug}`,options
+      `http://localhost:4000/stores/${slug}`,options
     );
   }
 
@@ -731,7 +731,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/stores/${slug}/products`,{
+      `http://localhost:4000/stores/${slug}/products`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -740,7 +740,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
 
 export const getGetStoresSlugProductsQueryKey = (slug: string,
     params?: GetStoresSlugProductsParams,) => {
-    return [`/stores/${slug}/products`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/stores/${slug}/products`, ...(params ? [params]: [])] as const;
     }
 
     

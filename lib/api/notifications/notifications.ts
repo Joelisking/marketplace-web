@@ -52,13 +52,13 @@ export const getNotifications = (
     
     
     return axios.get(
-      `/notifications`,options
+      `http://localhost:4000/notifications`,options
     );
   }
 
 
 export const getGetNotificationsQueryKey = () => {
-    return [`/notifications`] as const;
+    return [`http://localhost:4000/notifications`] as const;
     }
 
     
@@ -131,7 +131,7 @@ export const patchNotificationsNotificationIdRead = (
     
     
     return axios.patch(
-      `/notifications/${notificationId}/read`,undefined,options
+      `http://localhost:4000/notifications/${notificationId}/read`,undefined,options
     );
   }
 
@@ -185,7 +185,7 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.patch(
-      `/notifications/read-all`,undefined,options
+      `http://localhost:4000/notifications/read-all`,undefined,options
     );
   }
 
@@ -239,13 +239,13 @@ const {mutation: mutationOptions, axios: axiosOptions} = options ?
     
     
     return axios.get(
-      `/notifications/unread-count`,options
+      `http://localhost:4000/notifications/unread-count`,options
     );
   }
 
 
 export const getGetNotificationsUnreadCountQueryKey = () => {
-    return [`/notifications/unread-count`] as const;
+    return [`http://localhost:4000/notifications/unread-count`] as const;
     }
 
     

@@ -57,7 +57,7 @@ export const getCustomerOrders = (
     
     
     return axios.get(
-      `/customer/orders`,{
+      `http://localhost:4000/customer/orders`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -65,7 +65,7 @@ export const getCustomerOrders = (
 
 
 export const getGetCustomerOrdersQueryKey = (params?: GetCustomerOrdersParams,) => {
-    return [`/customer/orders`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/customer/orders`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -138,13 +138,13 @@ export const getCustomerOrdersOrderId = (
     
     
     return axios.get(
-      `/customer/orders/${orderId}`,options
+      `http://localhost:4000/customer/orders/${orderId}`,options
     );
   }
 
 
 export const getGetCustomerOrdersOrderIdQueryKey = (orderId: string,) => {
-    return [`/customer/orders/${orderId}`] as const;
+    return [`http://localhost:4000/customer/orders/${orderId}`] as const;
     }
 
     
@@ -217,13 +217,13 @@ export const getCustomerOrdersOrderIdTracking = (
     
     
     return axios.get(
-      `/customer/orders/${orderId}/tracking`,options
+      `http://localhost:4000/customer/orders/${orderId}/tracking`,options
     );
   }
 
 
 export const getGetCustomerOrdersOrderIdTrackingQueryKey = (orderId: string,) => {
-    return [`/customer/orders/${orderId}/tracking`] as const;
+    return [`http://localhost:4000/customer/orders/${orderId}/tracking`] as const;
     }
 
     
@@ -296,13 +296,13 @@ export const getCustomerStats = (
     
     
     return axios.get(
-      `/customer/stats`,options
+      `http://localhost:4000/customer/stats`,options
     );
   }
 
 
 export const getGetCustomerStatsQueryKey = () => {
-    return [`/customer/stats`] as const;
+    return [`http://localhost:4000/customer/stats`] as const;
     }
 
     
@@ -375,7 +375,7 @@ export const getCustomerDashboard = (
     
     
     return axios.get(
-      `/customer/dashboard`,{
+      `http://localhost:4000/customer/dashboard`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -383,7 +383,7 @@ export const getCustomerDashboard = (
 
 
 export const getGetCustomerDashboardQueryKey = (params?: GetCustomerDashboardParams,) => {
-    return [`/customer/dashboard`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/customer/dashboard`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -456,7 +456,7 @@ export const getCustomerAnalytics = (
     
     
     return axios.get(
-      `/customer/analytics`,{
+      `http://localhost:4000/customer/analytics`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -464,7 +464,7 @@ export const getCustomerAnalytics = (
 
 
 export const getGetCustomerAnalyticsQueryKey = (params?: GetCustomerAnalyticsParams,) => {
-    return [`/customer/analytics`, ...(params ? [params]: [])] as const;
+    return [`http://localhost:4000/customer/analytics`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -537,13 +537,13 @@ export const getCustomerPreferences = (
     
     
     return axios.get(
-      `/customer/preferences`,options
+      `http://localhost:4000/customer/preferences`,options
     );
   }
 
 
 export const getGetCustomerPreferencesQueryKey = () => {
-    return [`/customer/preferences`] as const;
+    return [`http://localhost:4000/customer/preferences`] as const;
     }
 
     

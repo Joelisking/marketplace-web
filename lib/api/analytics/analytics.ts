@@ -44,13 +44,13 @@ export const getAnalyticsBestSellers = (
     
     
     return axios.get(
-      `/analytics/best-sellers`,options
+      `http://localhost:4000/analytics/best-sellers`,options
     );
   }
 
 
 export const getGetAnalyticsBestSellersQueryKey = () => {
-    return [`/analytics/best-sellers`] as const;
+    return [`http://localhost:4000/analytics/best-sellers`] as const;
     }
 
     
@@ -123,13 +123,13 @@ export const getAnalyticsStoresSlugBestSellers = (
     
     
     return axios.get(
-      `/analytics/stores/${slug}/best-sellers`,options
+      `http://localhost:4000/analytics/stores/${slug}/best-sellers`,options
     );
   }
 
 
 export const getGetAnalyticsStoresSlugBestSellersQueryKey = (slug: string,) => {
-    return [`/analytics/stores/${slug}/best-sellers`] as const;
+    return [`http://localhost:4000/analytics/stores/${slug}/best-sellers`] as const;
     }
 
     
@@ -202,13 +202,13 @@ export const getAnalyticsFeatured = (
     
     
     return axios.get(
-      `/analytics/featured`,options
+      `http://localhost:4000/analytics/featured`,options
     );
   }
 
 
 export const getGetAnalyticsFeaturedQueryKey = () => {
-    return [`/analytics/featured`] as const;
+    return [`http://localhost:4000/analytics/featured`] as const;
     }
 
     

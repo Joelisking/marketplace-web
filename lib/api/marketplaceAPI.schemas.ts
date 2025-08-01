@@ -14,8 +14,8 @@ export interface AddToCartBody {
   quantity: number;
 }
 
-export type AuthResponseUserRole =
-  (typeof AuthResponseUserRole)[keyof typeof AuthResponseUserRole];
+export type AuthResponseUserRole = typeof AuthResponseUserRole[keyof typeof AuthResponseUserRole];
+
 
 export const AuthResponseUserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -26,11 +26,24 @@ export const AuthResponseUserRole = {
 
 export type AuthResponseUserStoreId = string | null;
 
+export type AuthResponseUserFirstName = string | null;
+
+export type AuthResponseUserLastName = string | null;
+
+export type AuthResponseUserPhone = string | null;
+
+export type AuthResponseUserUpdatedAt = string | null;
+
 export type AuthResponseUser = {
   id: string;
   email: string;
   role: AuthResponseUserRole;
   storeId: AuthResponseUserStoreId;
+  firstName: AuthResponseUserFirstName;
+  lastName: AuthResponseUserLastName;
+  phone: AuthResponseUserPhone;
+  createdAt: string;
+  updatedAt: AuthResponseUserUpdatedAt;
 };
 
 export interface AuthResponse {
@@ -106,41 +119,31 @@ export interface CheckoutItem {
   quantity: number;
 }
 
-export type CustomerOrderDetailsResponseDataOrderUpdatedAt =
-  | string
-  | null;
+export type CustomerOrderDetailsResponseDataOrderUpdatedAt = string | null;
 
-export type CustomerOrderDetailsResponseDataOrderEstimatedDelivery =
-  | string
-  | null;
+export type CustomerOrderDetailsResponseDataOrderEstimatedDelivery = string | null;
 
-export type CustomerOrderDetailsResponseDataOrderDeliveredAt =
-  | string
-  | null;
+export type CustomerOrderDetailsResponseDataOrderDeliveredAt = string | null;
 
-export type CustomerOrderDetailsResponseDataOrderShippingAddressAnyOf =
-  {
-    street: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  };
+export type CustomerOrderDetailsResponseDataOrderShippingAddressAnyOf = {
+  street: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+};
 
-export type CustomerOrderDetailsResponseDataOrderShippingAddress =
-  CustomerOrderDetailsResponseDataOrderShippingAddressAnyOf | null;
+export type CustomerOrderDetailsResponseDataOrderShippingAddress = CustomerOrderDetailsResponseDataOrderShippingAddressAnyOf | null;
 
-export type CustomerOrderDetailsResponseDataOrderBillingAddressAnyOf =
-  {
-    street: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  };
+export type CustomerOrderDetailsResponseDataOrderBillingAddressAnyOf = {
+  street: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+};
 
-export type CustomerOrderDetailsResponseDataOrderBillingAddress =
-  CustomerOrderDetailsResponseDataOrderBillingAddressAnyOf | null;
+export type CustomerOrderDetailsResponseDataOrderBillingAddress = CustomerOrderDetailsResponseDataOrderBillingAddressAnyOf | null;
 
 export type CustomerOrderDetailsResponseDataOrderStore = {
   id: string;
@@ -196,21 +199,18 @@ export interface CustomerOrderIdParam {
   orderId: string;
 }
 
-export type CustomerOrderListResponseDataOrdersItemUpdatedAt =
-  | string
-  | null;
+export type CustomerOrderListResponseDataOrdersItemUpdatedAt = string | null;
 
 export type CustomerOrderListResponseDataOrdersItemStore = {
   id: string;
   name: string;
 };
 
-export type CustomerOrderListResponseDataOrdersItemItemsItemProduct =
-  {
-    id: string;
-    name: string;
-    imageUrl: string;
-  };
+export type CustomerOrderListResponseDataOrdersItemItemsItemProduct = {
+  id: string;
+  name: string;
+  imageUrl: string;
+};
 
 export type CustomerOrderListResponseDataOrdersItemItemsItem = {
   id: string;
@@ -251,8 +251,8 @@ export interface CustomerOrderListResponse {
 /**
  * Filter orders by status
  */
-export type CustomerOrderQueryStatus =
-  (typeof CustomerOrderQueryStatus)[keyof typeof CustomerOrderQueryStatus];
+export type CustomerOrderQueryStatus = typeof CustomerOrderQueryStatus[keyof typeof CustomerOrderQueryStatus];
+
 
 export const CustomerOrderQueryStatus = {
   PENDING: 'PENDING',
@@ -270,6 +270,11 @@ export interface CustomerOrderQuery {
    * @pattern ^\d+$
    */
   page?: string;
+  /**
+   * Number of items per page
+   * @pattern ^\d+$
+   */
+  limit?: string;
   /** Filter orders by status */
   status?: CustomerOrderQueryStatus;
 }
@@ -323,8 +328,8 @@ export interface ErrorResponse {
   error?: string;
 }
 
-export type FulfillmentTrackingQueryStatus =
-  (typeof FulfillmentTrackingQueryStatus)[keyof typeof FulfillmentTrackingQueryStatus];
+export type FulfillmentTrackingQueryStatus = typeof FulfillmentTrackingQueryStatus[keyof typeof FulfillmentTrackingQueryStatus];
+
 
 export const FulfillmentTrackingQueryStatus = {
   PICKED_UP: 'PICKED_UP',
@@ -384,15 +389,11 @@ export interface MarkNotificationReadRequest {
   notificationId: string;
 }
 
-export type MarkNotificationReadResponseDataNotificationMetadataAnyOf =
-  { [key: string]: string };
+export type MarkNotificationReadResponseDataNotificationMetadataAnyOf = {[key: string]: string};
 
-export type MarkNotificationReadResponseDataNotificationMetadata =
-  MarkNotificationReadResponseDataNotificationMetadataAnyOf | null;
+export type MarkNotificationReadResponseDataNotificationMetadata = MarkNotificationReadResponseDataNotificationMetadataAnyOf | null;
 
-export type MarkNotificationReadResponseDataNotificationUpdatedAt =
-  | string
-  | null;
+export type MarkNotificationReadResponseDataNotificationUpdatedAt = string | null;
 
 export type MarkNotificationReadResponseDataNotification = {
   id: string;
@@ -415,8 +416,8 @@ export interface MarkNotificationReadResponse {
   data: MarkNotificationReadResponseData;
 }
 
-export type MeResponseUserRole =
-  (typeof MeResponseUserRole)[keyof typeof MeResponseUserRole];
+export type MeResponseUserRole = typeof MeResponseUserRole[keyof typeof MeResponseUserRole];
+
 
 export const MeResponseUserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -427,11 +428,24 @@ export const MeResponseUserRole = {
 
 export type MeResponseUserStoreId = string | null;
 
+export type MeResponseUserFirstName = string | null;
+
+export type MeResponseUserLastName = string | null;
+
+export type MeResponseUserPhone = string | null;
+
+export type MeResponseUserUpdatedAt = string | null;
+
 export type MeResponseUser = {
   id: string;
   email: string;
   role: MeResponseUserRole;
   storeId: MeResponseUserStoreId;
+  firstName: MeResponseUserFirstName;
+  lastName: MeResponseUserLastName;
+  phone: MeResponseUserPhone;
+  createdAt: string;
+  updatedAt: MeResponseUserUpdatedAt;
 };
 
 export interface MeResponse {
@@ -448,15 +462,11 @@ export interface NotificationIdParam {
   notificationId: string;
 }
 
-export type NotificationListResponseDataNotificationsItemMetadataAnyOf =
-  { [key: string]: string };
+export type NotificationListResponseDataNotificationsItemMetadataAnyOf = {[key: string]: string};
 
-export type NotificationListResponseDataNotificationsItemMetadata =
-  NotificationListResponseDataNotificationsItemMetadataAnyOf | null;
+export type NotificationListResponseDataNotificationsItemMetadata = NotificationListResponseDataNotificationsItemMetadataAnyOf | null;
 
-export type NotificationListResponseDataNotificationsItemUpdatedAt =
-  | string
-  | null;
+export type NotificationListResponseDataNotificationsItemUpdatedAt = string | null;
 
 export type NotificationListResponseDataNotificationsItem = {
   id: string;
@@ -487,12 +497,9 @@ export interface NotificationListResponse {
   data: NotificationListResponseData;
 }
 
-export type NotificationResponseMetadataAnyOf = {
-  [key: string]: string;
-};
+export type NotificationResponseMetadataAnyOf = {[key: string]: string};
 
-export type NotificationResponseMetadata =
-  NotificationResponseMetadataAnyOf | null;
+export type NotificationResponseMetadata = NotificationResponseMetadataAnyOf | null;
 
 export type NotificationResponseUpdatedAt = string | null;
 
@@ -520,8 +527,8 @@ export interface OrderItemResponse {
   price: number;
 }
 
-export type OrderListQueryStatus =
-  (typeof OrderListQueryStatus)[keyof typeof OrderListQueryStatus];
+export type OrderListQueryStatus = typeof OrderListQueryStatus[keyof typeof OrderListQueryStatus];
+
 
 export const OrderListQueryStatus = {
   PENDING: 'PENDING',
@@ -541,14 +548,19 @@ export interface OrderListQuery {
    * @pattern ^\d+$
    */
   page?: string;
+  /**
+   * Number of items per page
+   * @pattern ^\d+$
+   */
+  limit?: string;
   storeId?: string;
   status?: OrderListQueryStatus;
   startDate?: string;
   endDate?: string;
 }
 
-export type OrderListResponseItemsItemStatus =
-  (typeof OrderListResponseItemsItemStatus)[keyof typeof OrderListResponseItemsItemStatus];
+export type OrderListResponseItemsItemStatus = typeof OrderListResponseItemsItemStatus[keyof typeof OrderListResponseItemsItemStatus];
+
 
 export const OrderListResponseItemsItemStatus = {
   PENDING: 'PENDING',
@@ -560,8 +572,8 @@ export const OrderListResponseItemsItemStatus = {
   REFUNDED: 'REFUNDED',
 } as const;
 
-export type OrderListResponseItemsItemPaymentStatus =
-  (typeof OrderListResponseItemsItemPaymentStatus)[keyof typeof OrderListResponseItemsItemPaymentStatus];
+export type OrderListResponseItemsItemPaymentStatus = typeof OrderListResponseItemsItemPaymentStatus[keyof typeof OrderListResponseItemsItemPaymentStatus];
+
 
 export const OrderListResponseItemsItemPaymentStatus = {
   UNPAID: 'UNPAID',
@@ -609,8 +621,8 @@ export interface OrderListResponse {
   meta: OrderListResponseMeta;
 }
 
-export type OrderResponseStatus =
-  (typeof OrderResponseStatus)[keyof typeof OrderResponseStatus];
+export type OrderResponseStatus = typeof OrderResponseStatus[keyof typeof OrderResponseStatus];
+
 
 export const OrderResponseStatus = {
   PENDING: 'PENDING',
@@ -622,8 +634,8 @@ export const OrderResponseStatus = {
   REFUNDED: 'REFUNDED',
 } as const;
 
-export type OrderResponsePaymentStatus =
-  (typeof OrderResponsePaymentStatus)[keyof typeof OrderResponsePaymentStatus];
+export type OrderResponsePaymentStatus = typeof OrderResponsePaymentStatus[keyof typeof OrderResponsePaymentStatus];
+
 
 export const OrderResponsePaymentStatus = {
   UNPAID: 'UNPAID',
@@ -668,9 +680,7 @@ export interface OrderStatsQuery {
   days?: number;
 }
 
-export type OrderTrackingResponseDataEstimatedDelivery =
-  | string
-  | null;
+export type OrderTrackingResponseDataEstimatedDelivery = string | null;
 
 export type OrderTrackingResponseDataDeliveredAt = string | null;
 
@@ -680,9 +690,7 @@ export type OrderTrackingResponseDataTrackingEventsItem = {
   timestamp: string;
 };
 
-export type OrderTrackingResponseDataDeliveryUpdatesItemLocation =
-  | string
-  | null;
+export type OrderTrackingResponseDataDeliveryUpdatesItemLocation = string | null;
 
 export type OrderTrackingResponseDataDeliveryUpdatesItem = {
   status: string;
@@ -721,6 +729,11 @@ export interface PaginationQuery {
    * @pattern ^\d+$
    */
   page?: string;
+  /**
+   * Number of items per page
+   * @pattern ^\d+$
+   */
+  limit?: string;
 }
 
 export interface ProductBase {
@@ -820,6 +833,11 @@ export interface ProductListQuery {
    * @pattern ^\d+$
    */
   page?: string;
+  /**
+   * Number of items per page
+   * @pattern ^\d+$
+   */
+  limit?: string;
 }
 
 export type ProductListResponseItemsItemImagesItem = {
@@ -936,8 +954,8 @@ export interface RefreshBody {
   refreshToken: string;
 }
 
-export type RegisterBodyRole =
-  (typeof RegisterBodyRole)[keyof typeof RegisterBodyRole];
+export type RegisterBodyRole = typeof RegisterBodyRole[keyof typeof RegisterBodyRole];
+
 
 export const RegisterBodyRole = {
   CUSTOMER: 'CUSTOMER',
@@ -951,6 +969,9 @@ export interface RegisterBody {
   /** @minLength 8 */
   password: string;
   role?: RegisterBodyRole;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
 }
 
 export interface SlugParam {
@@ -974,6 +995,11 @@ export interface StoreListQuery {
    * @pattern ^\d+$
    */
   page?: string;
+  /**
+   * Number of items per page
+   * @pattern ^\d+$
+   */
+  limit?: string;
 }
 
 export type StoreListResponseItemsItemLogoUrl = string | null;
@@ -1056,8 +1082,8 @@ export interface UpdateCartItemBody {
   quantity: number;
 }
 
-export type UpdateOrderStatusBodyStatus =
-  (typeof UpdateOrderStatusBodyStatus)[keyof typeof UpdateOrderStatusBodyStatus];
+export type UpdateOrderStatusBodyStatus = typeof UpdateOrderStatusBodyStatus[keyof typeof UpdateOrderStatusBodyStatus];
+
 
 export const UpdateOrderStatusBodyStatus = {
   PENDING: 'PENDING',
@@ -1074,13 +1100,19 @@ export interface UpdateOrderStatusBody {
   reason?: string;
 }
 
+export interface UpdateUserBody {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+}
+
 export interface UserIdParam {
   /** Resource ID */
   id: string;
 }
 
-export type UserResponseRole =
-  (typeof UserResponseRole)[keyof typeof UserResponseRole];
+export type UserResponseRole = typeof UserResponseRole[keyof typeof UserResponseRole];
+
 
 export const UserResponseRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1091,15 +1123,28 @@ export const UserResponseRole = {
 
 export type UserResponseStoreId = string | null;
 
+export type UserResponseFirstName = string | null;
+
+export type UserResponseLastName = string | null;
+
+export type UserResponsePhone = string | null;
+
+export type UserResponseUpdatedAt = string | null;
+
 export interface UserResponse {
   id: string;
   email: string;
   role: UserResponseRole;
   storeId: UserResponseStoreId;
+  firstName: UserResponseFirstName;
+  lastName: UserResponseLastName;
+  phone: UserResponsePhone;
+  createdAt: string;
+  updatedAt: UserResponseUpdatedAt;
 }
 
-export type VendorAnalyticsQueryPeriod =
-  (typeof VendorAnalyticsQueryPeriod)[keyof typeof VendorAnalyticsQueryPeriod];
+export type VendorAnalyticsQueryPeriod = typeof VendorAnalyticsQueryPeriod[keyof typeof VendorAnalyticsQueryPeriod];
+
 
 export const VendorAnalyticsQueryPeriod = {
   '7d': '7d',
@@ -1169,13 +1214,12 @@ export type VendorAnalyticsResponsePerformanceTopProductsItem = {
   revenue: number;
 };
 
-export type VendorAnalyticsResponsePerformancePerformanceTrendsItem =
-  {
-    date: string;
-    orders: number;
-    revenue: number;
-    fulfillmentRate: number;
-  };
+export type VendorAnalyticsResponsePerformancePerformanceTrendsItem = {
+  date: string;
+  orders: number;
+  revenue: number;
+  fulfillmentRate: number;
+};
 
 export type VendorAnalyticsResponsePerformance = {
   fulfillmentRate: number;
@@ -1239,8 +1283,8 @@ export interface VendorPerformanceQuery {
   includeDetails?: boolean;
 }
 
-export type VendorRatingSchemaCategoriesItem =
-  (typeof VendorRatingSchemaCategoriesItem)[keyof typeof VendorRatingSchemaCategoriesItem];
+export type VendorRatingSchemaCategoriesItem = typeof VendorRatingSchemaCategoriesItem[keyof typeof VendorRatingSchemaCategoriesItem];
+
 
 export const VendorRatingSchemaCategoriesItem = {
   QUALITY: 'QUALITY',
@@ -1264,8 +1308,8 @@ export interface VendorRatingSchema {
   categories?: VendorRatingSchemaCategoriesItem[];
 }
 
-export type PostAuthRegisterBodyRole =
-  (typeof PostAuthRegisterBodyRole)[keyof typeof PostAuthRegisterBodyRole];
+export type PostAuthRegisterBodyRole = typeof PostAuthRegisterBodyRole[keyof typeof PostAuthRegisterBodyRole];
+
 
 export const PostAuthRegisterBodyRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1279,10 +1323,13 @@ export type PostAuthRegisterBody = {
   /** @minLength 8 */
   password: string;
   role?: PostAuthRegisterBodyRole;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
 };
 
-export type PostAuthRegister201UserRole =
-  (typeof PostAuthRegister201UserRole)[keyof typeof PostAuthRegister201UserRole];
+export type PostAuthRegister201UserRole = typeof PostAuthRegister201UserRole[keyof typeof PostAuthRegister201UserRole];
+
 
 export const PostAuthRegister201UserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1293,11 +1340,24 @@ export const PostAuthRegister201UserRole = {
 
 export type PostAuthRegister201UserStoreId = string | null;
 
+export type PostAuthRegister201UserFirstName = string | null;
+
+export type PostAuthRegister201UserLastName = string | null;
+
+export type PostAuthRegister201UserPhone = string | null;
+
+export type PostAuthRegister201UserUpdatedAt = string | null;
+
 export type PostAuthRegister201User = {
   id: string;
   email: string;
   role: PostAuthRegister201UserRole;
   storeId: PostAuthRegister201UserStoreId;
+  firstName: PostAuthRegister201UserFirstName;
+  lastName: PostAuthRegister201UserLastName;
+  phone: PostAuthRegister201UserPhone;
+  createdAt: string;
+  updatedAt: PostAuthRegister201UserUpdatedAt;
 };
 
 export type PostAuthRegister201 = {
@@ -1306,8 +1366,8 @@ export type PostAuthRegister201 = {
   user: PostAuthRegister201User;
 };
 
-export type PostAuthRegister409UserRole =
-  (typeof PostAuthRegister409UserRole)[keyof typeof PostAuthRegister409UserRole];
+export type PostAuthRegister409UserRole = typeof PostAuthRegister409UserRole[keyof typeof PostAuthRegister409UserRole];
+
 
 export const PostAuthRegister409UserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1318,11 +1378,24 @@ export const PostAuthRegister409UserRole = {
 
 export type PostAuthRegister409UserStoreId = string | null;
 
+export type PostAuthRegister409UserFirstName = string | null;
+
+export type PostAuthRegister409UserLastName = string | null;
+
+export type PostAuthRegister409UserPhone = string | null;
+
+export type PostAuthRegister409UserUpdatedAt = string | null;
+
 export type PostAuthRegister409User = {
   id: string;
   email: string;
   role: PostAuthRegister409UserRole;
   storeId: PostAuthRegister409UserStoreId;
+  firstName: PostAuthRegister409UserFirstName;
+  lastName: PostAuthRegister409UserLastName;
+  phone: PostAuthRegister409UserPhone;
+  createdAt: string;
+  updatedAt: PostAuthRegister409UserUpdatedAt;
 };
 
 export type PostAuthRegister409 = {
@@ -1337,8 +1410,8 @@ export type PostAuthLoginBody = {
   password: string;
 };
 
-export type PostAuthLogin201UserRole =
-  (typeof PostAuthLogin201UserRole)[keyof typeof PostAuthLogin201UserRole];
+export type PostAuthLogin201UserRole = typeof PostAuthLogin201UserRole[keyof typeof PostAuthLogin201UserRole];
+
 
 export const PostAuthLogin201UserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1349,11 +1422,24 @@ export const PostAuthLogin201UserRole = {
 
 export type PostAuthLogin201UserStoreId = string | null;
 
+export type PostAuthLogin201UserFirstName = string | null;
+
+export type PostAuthLogin201UserLastName = string | null;
+
+export type PostAuthLogin201UserPhone = string | null;
+
+export type PostAuthLogin201UserUpdatedAt = string | null;
+
 export type PostAuthLogin201User = {
   id: string;
   email: string;
   role: PostAuthLogin201UserRole;
   storeId: PostAuthLogin201UserStoreId;
+  firstName: PostAuthLogin201UserFirstName;
+  lastName: PostAuthLogin201UserLastName;
+  phone: PostAuthLogin201UserPhone;
+  createdAt: string;
+  updatedAt: PostAuthLogin201UserUpdatedAt;
 };
 
 export type PostAuthLogin201 = {
@@ -1366,8 +1452,8 @@ export type PostAuthRefreshBody = {
   refreshToken: string;
 };
 
-export type PostAuthRefresh200UserRole =
-  (typeof PostAuthRefresh200UserRole)[keyof typeof PostAuthRefresh200UserRole];
+export type PostAuthRefresh200UserRole = typeof PostAuthRefresh200UserRole[keyof typeof PostAuthRefresh200UserRole];
+
 
 export const PostAuthRefresh200UserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1378,11 +1464,24 @@ export const PostAuthRefresh200UserRole = {
 
 export type PostAuthRefresh200UserStoreId = string | null;
 
+export type PostAuthRefresh200UserFirstName = string | null;
+
+export type PostAuthRefresh200UserLastName = string | null;
+
+export type PostAuthRefresh200UserPhone = string | null;
+
+export type PostAuthRefresh200UserUpdatedAt = string | null;
+
 export type PostAuthRefresh200User = {
   id: string;
   email: string;
   role: PostAuthRefresh200UserRole;
   storeId: PostAuthRefresh200UserStoreId;
+  firstName: PostAuthRefresh200UserFirstName;
+  lastName: PostAuthRefresh200UserLastName;
+  phone: PostAuthRefresh200UserPhone;
+  createdAt: string;
+  updatedAt: PostAuthRefresh200UserUpdatedAt;
 };
 
 export type PostAuthRefresh200 = {
@@ -1391,14 +1490,30 @@ export type PostAuthRefresh200 = {
   user: PostAuthRefresh200User;
 };
 
+export type GetAuthUsers200ItemStoreId = string | null;
+
+export type GetAuthUsers200ItemFirstName = string | null;
+
+export type GetAuthUsers200ItemLastName = string | null;
+
+export type GetAuthUsers200ItemPhone = string | null;
+
+export type GetAuthUsers200ItemUpdatedAt = string | null;
+
 export type GetAuthUsers200Item = {
   id?: string;
   email?: string;
   role?: string;
+  storeId?: GetAuthUsers200ItemStoreId;
+  firstName?: GetAuthUsers200ItemFirstName;
+  lastName?: GetAuthUsers200ItemLastName;
+  phone?: GetAuthUsers200ItemPhone;
+  createdAt?: string;
+  updatedAt?: GetAuthUsers200ItemUpdatedAt;
 };
 
-export type GetAuthMe200UserRole =
-  (typeof GetAuthMe200UserRole)[keyof typeof GetAuthMe200UserRole];
+export type GetAuthMe200UserRole = typeof GetAuthMe200UserRole[keyof typeof GetAuthMe200UserRole];
+
 
 export const GetAuthMe200UserRole = {
   CUSTOMER: 'CUSTOMER',
@@ -1409,11 +1524,24 @@ export const GetAuthMe200UserRole = {
 
 export type GetAuthMe200UserStoreId = string | null;
 
+export type GetAuthMe200UserFirstName = string | null;
+
+export type GetAuthMe200UserLastName = string | null;
+
+export type GetAuthMe200UserPhone = string | null;
+
+export type GetAuthMe200UserUpdatedAt = string | null;
+
 export type GetAuthMe200User = {
   id: string;
   email: string;
   role: GetAuthMe200UserRole;
   storeId: GetAuthMe200UserStoreId;
+  firstName: GetAuthMe200UserFirstName;
+  lastName: GetAuthMe200UserLastName;
+  phone: GetAuthMe200UserPhone;
+  createdAt: string;
+  updatedAt: GetAuthMe200UserUpdatedAt;
 };
 
 export type GetAuthMe200 = {
@@ -1428,18 +1556,72 @@ export type GetAuthMe404 = {
   message?: string;
 };
 
+export type PatchAuthMeBody = {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+};
+
+export type PatchAuthMe200UserRole = typeof PatchAuthMe200UserRole[keyof typeof PatchAuthMe200UserRole];
+
+
+export const PatchAuthMe200UserRole = {
+  CUSTOMER: 'CUSTOMER',
+  VENDOR: 'VENDOR',
+  ADMIN: 'ADMIN',
+  SUPER: 'SUPER',
+} as const;
+
+export type PatchAuthMe200UserStoreId = string | null;
+
+export type PatchAuthMe200UserFirstName = string | null;
+
+export type PatchAuthMe200UserLastName = string | null;
+
+export type PatchAuthMe200UserPhone = string | null;
+
+export type PatchAuthMe200UserUpdatedAt = string | null;
+
+export type PatchAuthMe200User = {
+  id: string;
+  email: string;
+  role: PatchAuthMe200UserRole;
+  storeId: PatchAuthMe200UserStoreId;
+  firstName: PatchAuthMe200UserFirstName;
+  lastName: PatchAuthMe200UserLastName;
+  phone: PatchAuthMe200UserPhone;
+  createdAt: string;
+  updatedAt: PatchAuthMe200UserUpdatedAt;
+};
+
+export type PatchAuthMe200 = {
+  user: PatchAuthMe200User;
+};
+
+export type PatchAuthMe400 = {
+  message?: string;
+};
+
+export type PatchAuthMe401 = {
+  message?: string;
+};
+
+export type PatchAuthMe404 = {
+  message?: string;
+};
+
 export type GetProductsParams = {
-  q?: string;
-  category?: string;
-  storeId?: string;
-  /**
-   * @pattern ^\d+$
-   */
-  page?: string;
-  /**
-   * @pattern ^\d+$
-   */
-  limit?: string;
+q?: string;
+category?: string;
+storeId?: string;
+/**
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * @pattern ^\d+$
+ */
+limit?: string;
 };
 
 export type GetProducts200ItemsItemImagesItem = {
@@ -1668,15 +1850,15 @@ export type DeleteProductsId404 = {
 };
 
 export type GetStoresParams = {
-  q?: string;
-  /**
-   * @pattern ^\d+$
-   */
-  page?: string;
-  /**
-   * @pattern ^\d+$
-   */
-  limit?: string;
+q?: string;
+/**
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * @pattern ^\d+$
+ */
+limit?: string;
 };
 
 export type GetStores200ItemsItemLogoUrl = string | null;
@@ -1811,17 +1993,17 @@ export type DeleteStoresSlug404 = {
 };
 
 export type GetStoresSlugProductsParams = {
-  q?: string;
-  category?: string;
-  storeId?: string;
-  /**
-   * @pattern ^\d+$
-   */
-  page?: string;
-  /**
-   * @pattern ^\d+$
-   */
-  limit?: string;
+q?: string;
+category?: string;
+storeId?: string;
+/**
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * @pattern ^\d+$
+ */
+limit?: string;
 };
 
 export type GetStoresSlugProducts200ItemsItemImagesItem = {
@@ -1873,17 +2055,35 @@ export type GetStoresSlugProducts404 = {
   message?: string;
 };
 
-export type GetVendorDashboard200Store = {
+export type GetVendorDashboard200StoreAnyOf = {
   id?: string;
   name?: string;
   slug?: string;
   logoUrl?: string;
 };
 
+export type GetVendorDashboard200Store = GetVendorDashboard200StoreAnyOf | null;
+
+export type GetVendorDashboard200OwnerStoreId = string | null;
+
+export type GetVendorDashboard200OwnerFirstName = string | null;
+
+export type GetVendorDashboard200OwnerLastName = string | null;
+
+export type GetVendorDashboard200OwnerPhone = string | null;
+
+export type GetVendorDashboard200OwnerUpdatedAt = string | null;
+
 export type GetVendorDashboard200Owner = {
   id?: string;
   email?: string;
   role?: string;
+  storeId?: GetVendorDashboard200OwnerStoreId;
+  firstName?: GetVendorDashboard200OwnerFirstName;
+  lastName?: GetVendorDashboard200OwnerLastName;
+  phone?: GetVendorDashboard200OwnerPhone;
+  createdAt?: string;
+  updatedAt?: GetVendorDashboard200OwnerUpdatedAt;
 };
 
 export type GetVendorDashboard200Stats = {
@@ -1891,12 +2091,19 @@ export type GetVendorDashboard200Stats = {
   lowStockProducts?: number;
   visibleProducts?: number;
   hiddenProducts?: number;
+  totalOrders?: number;
+  totalRevenue?: number;
+  totalItemsSold?: number;
 };
+
+export type GetVendorDashboard200RecentOrdersItem = { [key: string]: unknown };
 
 export type GetVendorDashboard200 = {
   store?: GetVendorDashboard200Store;
   owner?: GetVendorDashboard200Owner;
   stats?: GetVendorDashboard200Stats;
+  recentOrders?: GetVendorDashboard200RecentOrdersItem[];
+  message?: string;
 };
 
 export type GetVendorDashboard401 = {
@@ -1934,6 +2141,8 @@ export type GetVendorStore200 = {
   name?: string;
   slug?: string;
   logoUrl?: string;
+  paystackAccountCode?: string;
+  paystackAccountActive?: boolean;
   owner?: GetVendorStore200Owner;
 };
 
@@ -2029,13 +2238,13 @@ export type GetVendorProductsBestSellers404 = {
 };
 
 export type GetVendorAnalyticsParams = {
-  period?: GetVendorAnalyticsPeriod;
-  startDate?: string;
-  endDate?: string;
+period?: GetVendorAnalyticsPeriod;
+startDate?: string;
+endDate?: string;
 };
 
-export type GetVendorAnalyticsPeriod =
-  (typeof GetVendorAnalyticsPeriod)[keyof typeof GetVendorAnalyticsPeriod];
+export type GetVendorAnalyticsPeriod = typeof GetVendorAnalyticsPeriod[keyof typeof GetVendorAnalyticsPeriod];
+
 
 export const GetVendorAnalyticsPeriod = {
   '7d': '7d',
@@ -2119,12 +2328,12 @@ export type GetVendorAnalytics401 = {
 };
 
 export type GetVendorPerformanceParams = {
-  /**
-   * @minimum 1
-   * @maximum 365
-   */
-  days?: number;
-  includeDetails?: boolean;
+/**
+ * @minimum 1
+ * @maximum 365
+ */
+days?: number;
+includeDetails?: boolean;
 };
 
 export type GetVendorPerformance200TopProductsItem = {
@@ -2160,8 +2369,8 @@ export type GetVendorPerformance401 = {
   message?: string;
 };
 
-export type PutVendorOrdersOrderIdTrackingBodyStatus =
-  (typeof PutVendorOrdersOrderIdTrackingBodyStatus)[keyof typeof PutVendorOrdersOrderIdTrackingBodyStatus];
+export type PutVendorOrdersOrderIdTrackingBodyStatus = typeof PutVendorOrdersOrderIdTrackingBodyStatus[keyof typeof PutVendorOrdersOrderIdTrackingBodyStatus];
+
 
 export const PutVendorOrdersOrderIdTrackingBodyStatus = {
   PICKED_UP: 'PICKED_UP',
@@ -2178,13 +2387,12 @@ export type PutVendorOrdersOrderIdTrackingBody = {
   status?: PutVendorOrdersOrderIdTrackingBodyStatus;
 };
 
-export type PutVendorOrdersOrderIdTracking200TrackingTrackingHistoryItem =
-  {
-    status?: string;
-    location?: string;
-    timestamp?: string;
-    description?: string;
-  };
+export type PutVendorOrdersOrderIdTracking200TrackingTrackingHistoryItem = {
+  status?: string;
+  location?: string;
+  timestamp?: string;
+  description?: string;
+};
 
 export type PutVendorOrdersOrderIdTracking200Tracking = {
   orderId?: string;
@@ -2289,9 +2497,7 @@ export type PostVendorPaymentAccountBody = {
   businessAddress?: string;
 };
 
-export type PostVendorPaymentAccount200AccountMetadata = {
-  [key: string]: unknown;
-};
+export type PostVendorPaymentAccount200AccountMetadata = { [key: string]: unknown };
 
 export type PostVendorPaymentAccount200Account = {
   id?: string;
@@ -2335,11 +2541,37 @@ export type PostVendorPaymentAccount403 = {
   message?: string;
 };
 
+export type PostVendorPaymentAccountFromApplicationBody = { [key: string]: unknown };
+
+export type PostVendorPaymentAccountFromApplication200Account = {
+  accountCode?: string;
+  accountId?: string;
+  status?: string;
+};
+
+export type PostVendorPaymentAccountFromApplication200 = {
+  success?: boolean;
+  message?: string;
+  account?: PostVendorPaymentAccountFromApplication200Account;
+};
+
+export type PostVendorPaymentAccountFromApplication400 = {
+  message?: string;
+};
+
+export type PostVendorPaymentAccountFromApplication401 = {
+  message?: string;
+};
+
+export type PostVendorPaymentAccountFromApplication404 = {
+  message?: string;
+};
+
 export type GetVendorPaymentEarningsParams = {
-  startDate?: string;
-  endDate?: string;
-  page?: number;
-  perPage?: number;
+startDate?: string;
+endDate?: string;
+page?: number;
+perPage?: number;
 };
 
 export type GetVendorPaymentEarnings200PayoutsItem = {
@@ -2364,11 +2596,11 @@ export type GetVendorPaymentEarnings401 = {
 };
 
 export type GetVendorPaymentPayoutsHistoryParams = {
-  page?: number;
-  perPage?: number;
-  status?: string;
-  startDate?: string;
-  endDate?: string;
+page?: number;
+perPage?: number;
+status?: string;
+startDate?: string;
+endDate?: string;
 };
 
 export type GetVendorPaymentPayoutsHistory200PayoutsItemOrder = {
@@ -2403,13 +2635,13 @@ export type GetVendorPaymentPayoutsHistory401 = {
 };
 
 export type GetVendorMetricsParams = {
-  /**
-   * @minimum 1
-   * @maximum 365
-   */
-  days?: number;
-  startDate?: string;
-  endDate?: string;
+/**
+ * @minimum 1
+ * @maximum 365
+ */
+days?: number;
+startDate?: string;
+endDate?: string;
 };
 
 export type GetVendorMetrics200ByStatusItem = {
@@ -2816,7 +3048,7 @@ export type DeleteCart200 = {
 };
 
 export type GetEnhancedCartParams = {
-  syncData?: string;
+syncData?: string;
 };
 
 export type GetEnhancedCart200CartItemsItemUpdatedAt = string | null;
@@ -2873,9 +3105,7 @@ export type PostEnhancedCartItemsBody = {
   quantity: number;
 };
 
-export type PostEnhancedCartItems200CartItemsItemUpdatedAt =
-  | string
-  | null;
+export type PostEnhancedCartItems200CartItemsItemUpdatedAt = string | null;
 
 export type PostEnhancedCartItems200CartItemsItemProduct = {
   id: string;
@@ -2928,9 +3158,7 @@ export type PutEnhancedCartItemsProductIdBody = {
   quantity: number;
 };
 
-export type PutEnhancedCartItemsProductId200CartItemsItemUpdatedAt =
-  | string
-  | null;
+export type PutEnhancedCartItemsProductId200CartItemsItemUpdatedAt = string | null;
 
 export type PutEnhancedCartItemsProductId200CartItemsItemProduct = {
   id: string;
@@ -2976,16 +3204,14 @@ export type PutEnhancedCartItemsProductId200 = {
   syncData?: PutEnhancedCartItemsProductId200SyncData;
 };
 
-export type DeleteEnhancedCartItemsProductId200CartItemsItemUpdatedAt =
-  string | null;
+export type DeleteEnhancedCartItemsProductId200CartItemsItemUpdatedAt = string | null;
 
-export type DeleteEnhancedCartItemsProductId200CartItemsItemProduct =
-  {
-    id: string;
-    name: string;
-    price: number;
-    imageUrl: string;
-  };
+export type DeleteEnhancedCartItemsProductId200CartItemsItemProduct = {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+};
 
 export type DeleteEnhancedCartItemsProductId200CartItemsItem = {
   id: string;
@@ -3005,12 +3231,11 @@ export type DeleteEnhancedCartItemsProductId200Cart = {
   total: number;
 };
 
-export type DeleteEnhancedCartItemsProductId200SyncDataLocalItemsItem =
-  {
-    productId: string;
-    quantity: number;
-    addedAt: number;
-  };
+export type DeleteEnhancedCartItemsProductId200SyncDataLocalItemsItem = {
+  productId: string;
+  quantity: number;
+  addedAt: number;
+};
 
 export type DeleteEnhancedCartItemsProductId200SyncData = {
   localItems: DeleteEnhancedCartItemsProductId200SyncDataLocalItemsItem[];
@@ -3034,9 +3259,7 @@ export type PostEnhancedCartSyncBody = {
   localItems: PostEnhancedCartSyncBodyLocalItemsItem[];
 };
 
-export type PostEnhancedCartSync200CartItemsItemUpdatedAt =
-  | string
-  | null;
+export type PostEnhancedCartSync200CartItemsItemUpdatedAt = string | null;
 
 export type PostEnhancedCartSync200CartItemsItemProduct = {
   id: string;
@@ -3134,23 +3357,28 @@ export type PostOrders200 = {
 };
 
 export type GetOrdersParams = {
-  /**
-   * Search query
-   */
-  q?: string;
-  /**
-   * 1-based page number
-   * @pattern ^\d+$
-   */
-  page?: string;
-  storeId?: string;
-  status?: GetOrdersStatus;
-  startDate?: string;
-  endDate?: string;
+/**
+ * Search query
+ */
+q?: string;
+/**
+ * 1-based page number
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * Number of items per page
+ * @pattern ^\d+$
+ */
+limit?: string;
+storeId?: string;
+status?: GetOrdersStatus;
+startDate?: string;
+endDate?: string;
 };
 
-export type GetOrdersStatus =
-  (typeof GetOrdersStatus)[keyof typeof GetOrdersStatus];
+export type GetOrdersStatus = typeof GetOrdersStatus[keyof typeof GetOrdersStatus];
+
 
 export const GetOrdersStatus = {
   PENDING: 'PENDING',
@@ -3246,23 +3474,28 @@ export type PatchVendorOrdersOrderIdStatus200 = {
 };
 
 export type GetVendorOrdersParams = {
-  /**
-   * Search query
-   */
-  q?: string;
-  /**
-   * 1-based page number
-   * @pattern ^\d+$
-   */
-  page?: string;
-  storeId?: string;
-  status?: GetVendorOrdersStatus;
-  startDate?: string;
-  endDate?: string;
+/**
+ * Search query
+ */
+q?: string;
+/**
+ * 1-based page number
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * Number of items per page
+ * @pattern ^\d+$
+ */
+limit?: string;
+storeId?: string;
+status?: GetVendorOrdersStatus;
+startDate?: string;
+endDate?: string;
 };
 
-export type GetVendorOrdersStatus =
-  (typeof GetVendorOrdersStatus)[keyof typeof GetVendorOrdersStatus];
+export type GetVendorOrdersStatus = typeof GetVendorOrdersStatus[keyof typeof GetVendorOrdersStatus];
+
 
 export const GetVendorOrdersStatus = {
   PENDING: 'PENDING',
@@ -3303,11 +3536,11 @@ export type GetVendorOrders200 = {
 };
 
 export type GetVendorOrdersStatsParams = {
-  /**
-   * @minimum 1
-   * @maximum 365
-   */
-  days?: number;
+/**
+ * @minimum 1
+ * @maximum 365
+ */
+days?: number;
 };
 
 export type GetVendorOrdersStats200ByStatusItem = {
@@ -3324,23 +3557,28 @@ export type GetVendorOrdersStats200 = {
 };
 
 export type GetCustomerOrdersParams = {
-  /**
-   * Search query
-   */
-  q?: string;
-  /**
-   * 1-based page number
-   * @pattern ^\d+$
-   */
-  page?: string;
-  /**
-   * Filter orders by status
-   */
-  status?: GetCustomerOrdersStatus;
+/**
+ * Search query
+ */
+q?: string;
+/**
+ * 1-based page number
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * Number of items per page
+ * @pattern ^\d+$
+ */
+limit?: string;
+/**
+ * Filter orders by status
+ */
+status?: GetCustomerOrdersStatus;
 };
 
-export type GetCustomerOrdersStatus =
-  (typeof GetCustomerOrdersStatus)[keyof typeof GetCustomerOrdersStatus];
+export type GetCustomerOrdersStatus = typeof GetCustomerOrdersStatus[keyof typeof GetCustomerOrdersStatus];
+
 
 export const GetCustomerOrdersStatus = {
   PENDING: 'PENDING',
@@ -3350,9 +3588,7 @@ export const GetCustomerOrdersStatus = {
   CANCELLED: 'CANCELLED',
 } as const;
 
-export type GetCustomerOrders200DataOrdersItemUpdatedAt =
-  | string
-  | null;
+export type GetCustomerOrders200DataOrdersItemUpdatedAt = string | null;
 
 export type GetCustomerOrders200DataOrdersItemStore = {
   id: string;
@@ -3406,41 +3642,31 @@ export type GetCustomerOrders400 = {
   error?: string;
 };
 
-export type GetCustomerOrdersOrderId200DataOrderUpdatedAt =
-  | string
-  | null;
+export type GetCustomerOrdersOrderId200DataOrderUpdatedAt = string | null;
 
-export type GetCustomerOrdersOrderId200DataOrderEstimatedDelivery =
-  | string
-  | null;
+export type GetCustomerOrdersOrderId200DataOrderEstimatedDelivery = string | null;
 
-export type GetCustomerOrdersOrderId200DataOrderDeliveredAt =
-  | string
-  | null;
+export type GetCustomerOrdersOrderId200DataOrderDeliveredAt = string | null;
 
-export type GetCustomerOrdersOrderId200DataOrderShippingAddressAnyOf =
-  {
-    street: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  };
+export type GetCustomerOrdersOrderId200DataOrderShippingAddressAnyOf = {
+  street: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+};
 
-export type GetCustomerOrdersOrderId200DataOrderShippingAddress =
-  GetCustomerOrdersOrderId200DataOrderShippingAddressAnyOf | null;
+export type GetCustomerOrdersOrderId200DataOrderShippingAddress = GetCustomerOrdersOrderId200DataOrderShippingAddressAnyOf | null;
 
-export type GetCustomerOrdersOrderId200DataOrderBillingAddressAnyOf =
-  {
-    street: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-  };
+export type GetCustomerOrdersOrderId200DataOrderBillingAddressAnyOf = {
+  street: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+};
 
-export type GetCustomerOrdersOrderId200DataOrderBillingAddress =
-  GetCustomerOrdersOrderId200DataOrderBillingAddressAnyOf | null;
+export type GetCustomerOrdersOrderId200DataOrderBillingAddress = GetCustomerOrdersOrderId200DataOrderBillingAddressAnyOf | null;
 
 export type GetCustomerOrdersOrderId200DataOrderStore = {
   id: string;
@@ -3496,30 +3722,24 @@ export type GetCustomerOrdersOrderId400 = {
   error?: string;
 };
 
-export type GetCustomerOrdersOrderIdTracking200DataEstimatedDelivery =
-  string | null;
+export type GetCustomerOrdersOrderIdTracking200DataEstimatedDelivery = string | null;
 
-export type GetCustomerOrdersOrderIdTracking200DataDeliveredAt =
-  | string
-  | null;
+export type GetCustomerOrdersOrderIdTracking200DataDeliveredAt = string | null;
 
-export type GetCustomerOrdersOrderIdTracking200DataTrackingEventsItem =
-  {
-    eventType: string;
-    description: string;
-    timestamp: string;
-  };
+export type GetCustomerOrdersOrderIdTracking200DataTrackingEventsItem = {
+  eventType: string;
+  description: string;
+  timestamp: string;
+};
 
-export type GetCustomerOrdersOrderIdTracking200DataDeliveryUpdatesItemLocation =
-  string | null;
+export type GetCustomerOrdersOrderIdTracking200DataDeliveryUpdatesItemLocation = string | null;
 
-export type GetCustomerOrdersOrderIdTracking200DataDeliveryUpdatesItem =
-  {
-    status: string;
-    location: GetCustomerOrdersOrderIdTracking200DataDeliveryUpdatesItemLocation;
-    timestamp: string;
-    description: string;
-  };
+export type GetCustomerOrdersOrderIdTracking200DataDeliveryUpdatesItem = {
+  status: string;
+  location: GetCustomerOrdersOrderIdTracking200DataDeliveryUpdatesItemLocation;
+  timestamp: string;
+  description: string;
+};
 
 export type GetCustomerOrdersOrderIdTracking200Data = {
   orderId: string;
@@ -3560,11 +3780,11 @@ export type GetCustomerStats400 = {
 };
 
 export type GetCustomerDashboardParams = {
-  period?: GetCustomerDashboardPeriod;
+period?: GetCustomerDashboardPeriod;
 };
 
-export type GetCustomerDashboardPeriod =
-  (typeof GetCustomerDashboardPeriod)[keyof typeof GetCustomerDashboardPeriod];
+export type GetCustomerDashboardPeriod = typeof GetCustomerDashboardPeriod[keyof typeof GetCustomerDashboardPeriod];
+
 
 export const GetCustomerDashboardPeriod = {
   '7d': '7d',
@@ -3614,11 +3834,11 @@ export type GetCustomerDashboard401 = {
 };
 
 export type GetCustomerAnalyticsParams = {
-  /**
-   * @minimum 1
-   * @maximum 365
-   */
-  days?: number;
+/**
+ * @minimum 1
+ * @maximum 365
+ */
+days?: number;
 };
 
 export type GetCustomerAnalytics200OrderTrendsItem = {
@@ -3686,16 +3906,11 @@ export type GetCustomerPreferences401 = {
   message?: string;
 };
 
-export type GetNotifications200DataNotificationsItemMetadataAnyOf = {
-  [key: string]: string;
-};
+export type GetNotifications200DataNotificationsItemMetadataAnyOf = {[key: string]: string};
 
-export type GetNotifications200DataNotificationsItemMetadata =
-  GetNotifications200DataNotificationsItemMetadataAnyOf | null;
+export type GetNotifications200DataNotificationsItemMetadata = GetNotifications200DataNotificationsItemMetadataAnyOf | null;
 
-export type GetNotifications200DataNotificationsItemUpdatedAt =
-  | string
-  | null;
+export type GetNotifications200DataNotificationsItemUpdatedAt = string | null;
 
 export type GetNotifications200DataNotificationsItem = {
   id: string;
@@ -3731,27 +3946,23 @@ export type GetNotifications400 = {
   error?: string;
 };
 
-export type PatchNotificationsNotificationIdRead200DataNotificationMetadataAnyOf =
-  { [key: string]: string };
+export type PatchNotificationsNotificationIdRead200DataNotificationMetadataAnyOf = {[key: string]: string};
 
-export type PatchNotificationsNotificationIdRead200DataNotificationMetadata =
-  PatchNotificationsNotificationIdRead200DataNotificationMetadataAnyOf | null;
+export type PatchNotificationsNotificationIdRead200DataNotificationMetadata = PatchNotificationsNotificationIdRead200DataNotificationMetadataAnyOf | null;
 
-export type PatchNotificationsNotificationIdRead200DataNotificationUpdatedAt =
-  string | null;
+export type PatchNotificationsNotificationIdRead200DataNotificationUpdatedAt = string | null;
 
-export type PatchNotificationsNotificationIdRead200DataNotification =
-  {
-    id: string;
-    userId: string;
-    type: string;
-    title: string;
-    message: string;
-    isRead: boolean;
-    metadata: PatchNotificationsNotificationIdRead200DataNotificationMetadata;
-    createdAt: string;
-    updatedAt: PatchNotificationsNotificationIdRead200DataNotificationUpdatedAt;
-  };
+export type PatchNotificationsNotificationIdRead200DataNotification = {
+  id: string;
+  userId: string;
+  type: string;
+  title: string;
+  message: string;
+  isRead: boolean;
+  metadata: PatchNotificationsNotificationIdRead200DataNotificationMetadata;
+  createdAt: string;
+  updatedAt: PatchNotificationsNotificationIdRead200DataNotificationUpdatedAt;
+};
 
 export type PatchNotificationsNotificationIdRead200Data = {
   notification: PatchNotificationsNotificationIdRead200DataNotification;
@@ -3796,14 +4007,14 @@ export type GetNotificationsUnreadCount400 = {
 };
 
 export type GetSuperSystemOverviewParams = {
-  /**
-   * Start date for overview (ISO format)
-   */
-  startDate?: string;
-  /**
-   * End date for overview (ISO format)
-   */
-  endDate?: string;
+/**
+ * Start date for overview (ISO format)
+ */
+startDate?: string;
+/**
+ * End date for overview (ISO format)
+ */
+endDate?: string;
 };
 
 export type GetSuperSystemOverview200OverviewPeriod = {
@@ -3822,13 +4033,9 @@ export type GetSuperSystemOverview200Overview = {
   period?: GetSuperSystemOverview200OverviewPeriod;
 };
 
-export type GetSuperSystemOverview200RecentActivityUsersItem = {
-  [key: string]: unknown;
-};
+export type GetSuperSystemOverview200RecentActivityUsersItem = { [key: string]: unknown };
 
-export type GetSuperSystemOverview200RecentActivityOrdersItem = {
-  [key: string]: unknown;
-};
+export type GetSuperSystemOverview200RecentActivityOrdersItem = { [key: string]: unknown };
 
 export type GetSuperSystemOverview200RecentActivity = {
   users?: GetSuperSystemOverview200RecentActivityUsersItem[];
@@ -3850,29 +4057,29 @@ export type GetSuperSystemOverview200 = {
 };
 
 export type GetSuperVendorsParams = {
-  /**
-   * Page number
-   * @minimum 1
-   */
-  page?: number;
-  /**
-   * Items per page
-   * @minimum 1
-   * @maximum 100
-   */
-  limit?: number;
-  /**
-   * Search vendors by email or store name
-   */
-  search?: string;
-  /**
-   * Filter by store status
-   */
-  status?: GetSuperVendorsStatus;
+/**
+ * Page number
+ * @minimum 1
+ */
+page?: number;
+/**
+ * Items per page
+ * @minimum 1
+ * @maximum 100
+ */
+limit?: number;
+/**
+ * Search vendors by email or store name
+ */
+search?: string;
+/**
+ * Filter by store status
+ */
+status?: GetSuperVendorsStatus;
 };
 
-export type GetSuperVendorsStatus =
-  (typeof GetSuperVendorsStatus)[keyof typeof GetSuperVendorsStatus];
+export type GetSuperVendorsStatus = typeof GetSuperVendorsStatus[keyof typeof GetSuperVendorsStatus];
+
 
 export const GetSuperVendorsStatus = {
   active: 'active',
@@ -3880,19 +4087,30 @@ export const GetSuperVendorsStatus = {
   all: 'all',
 } as const;
 
-export type GetSuperVendors200VendorsItemStore = {
-  [key: string]: unknown;
-};
+export type GetSuperVendors200VendorsItemStoreId = string | null;
 
-export type GetSuperVendors200VendorsItemStats = {
-  [key: string]: unknown;
-};
+export type GetSuperVendors200VendorsItemFirstName = string | null;
+
+export type GetSuperVendors200VendorsItemLastName = string | null;
+
+export type GetSuperVendors200VendorsItemPhone = string | null;
+
+export type GetSuperVendors200VendorsItemUpdatedAt = string | null;
+
+export type GetSuperVendors200VendorsItemStore = { [key: string]: unknown };
+
+export type GetSuperVendors200VendorsItemStats = { [key: string]: unknown };
 
 export type GetSuperVendors200VendorsItem = {
   id?: string;
   email?: string;
   role?: string;
+  storeId?: GetSuperVendors200VendorsItemStoreId;
+  firstName?: GetSuperVendors200VendorsItemFirstName;
+  lastName?: GetSuperVendors200VendorsItemLastName;
+  phone?: GetSuperVendors200VendorsItemPhone;
   createdAt?: string;
+  updatedAt?: GetSuperVendors200VendorsItemUpdatedAt;
   store?: GetSuperVendors200VendorsItemStore;
   stats?: GetSuperVendors200VendorsItemStats;
 };
@@ -3910,22 +4128,22 @@ export type GetSuperVendors200 = {
 };
 
 export type GetSuperPaymentsOverviewParams = {
-  /**
-   * Start date for overview (ISO format)
-   */
-  startDate?: string;
-  /**
-   * End date for overview (ISO format)
-   */
-  endDate?: string;
-  /**
-   * Filter by payout status
-   */
-  status?: GetSuperPaymentsOverviewStatus;
+/**
+ * Start date for overview (ISO format)
+ */
+startDate?: string;
+/**
+ * End date for overview (ISO format)
+ */
+endDate?: string;
+/**
+ * Filter by payout status
+ */
+status?: GetSuperPaymentsOverviewStatus;
 };
 
-export type GetSuperPaymentsOverviewStatus =
-  (typeof GetSuperPaymentsOverviewStatus)[keyof typeof GetSuperPaymentsOverviewStatus];
+export type GetSuperPaymentsOverviewStatus = typeof GetSuperPaymentsOverviewStatus[keyof typeof GetSuperPaymentsOverviewStatus];
+
 
 export const GetSuperPaymentsOverviewStatus = {
   all: 'all',
@@ -3934,13 +4152,9 @@ export const GetSuperPaymentsOverviewStatus = {
   failed: 'failed',
 } as const;
 
-export type GetSuperPaymentsOverview200PayoutsItem = {
-  [key: string]: unknown;
-};
+export type GetSuperPaymentsOverview200PayoutsItem = { [key: string]: unknown };
 
-export type GetSuperPaymentsOverview200OverviewPeriod = {
-  [key: string]: unknown;
-};
+export type GetSuperPaymentsOverview200OverviewPeriod = { [key: string]: unknown };
 
 export type GetSuperPaymentsOverview200Overview = {
   totalPayouts?: number;
@@ -3948,9 +4162,7 @@ export type GetSuperPaymentsOverview200Overview = {
   period?: GetSuperPaymentsOverview200OverviewPeriod;
 };
 
-export type GetSuperPaymentsOverview200Stats = {
-  [key: string]: unknown;
-};
+export type GetSuperPaymentsOverview200Stats = { [key: string]: unknown };
 
 export type GetSuperPaymentsOverview200 = {
   payouts?: GetSuperPaymentsOverview200PayoutsItem[];
@@ -3958,42 +4170,44 @@ export type GetSuperPaymentsOverview200 = {
   stats?: GetSuperPaymentsOverview200Stats;
 };
 
-export type GetSuperVendorsVendorId200Store = {
-  [key: string]: unknown;
-};
+export type GetSuperVendorsVendorId200StoreId = string | null;
 
-export type GetSuperVendorsVendorId200VendorPayoutsItem = {
-  [key: string]: unknown;
-};
+export type GetSuperVendorsVendorId200FirstName = string | null;
 
-export type GetSuperVendorsVendorId200Stats = {
-  [key: string]: unknown;
-};
+export type GetSuperVendorsVendorId200LastName = string | null;
+
+export type GetSuperVendorsVendorId200Phone = string | null;
+
+export type GetSuperVendorsVendorId200UpdatedAt = string | null;
+
+export type GetSuperVendorsVendorId200Store = { [key: string]: unknown };
+
+export type GetSuperVendorsVendorId200VendorPayoutsItem = { [key: string]: unknown };
+
+export type GetSuperVendorsVendorId200Stats = { [key: string]: unknown };
 
 export type GetSuperVendorsVendorId200 = {
   id?: string;
   email?: string;
   role?: string;
+  storeId?: GetSuperVendorsVendorId200StoreId;
+  firstName?: GetSuperVendorsVendorId200FirstName;
+  lastName?: GetSuperVendorsVendorId200LastName;
+  phone?: GetSuperVendorsVendorId200Phone;
+  createdAt?: string;
+  updatedAt?: GetSuperVendorsVendorId200UpdatedAt;
   store?: GetSuperVendorsVendorId200Store;
   vendorPayouts?: GetSuperVendorsVendorId200VendorPayoutsItem[];
   stats?: GetSuperVendorsVendorId200Stats;
 };
 
-export type GetSuperAnalytics200UserGrowthItem = {
-  [key: string]: unknown;
-};
+export type GetSuperAnalytics200UserGrowthItem = { [key: string]: unknown };
 
-export type GetSuperAnalytics200OrderGrowthItem = {
-  [key: string]: unknown;
-};
+export type GetSuperAnalytics200OrderGrowthItem = { [key: string]: unknown };
 
-export type GetSuperAnalytics200RevenueGrowthItem = {
-  [key: string]: unknown;
-};
+export type GetSuperAnalytics200RevenueGrowthItem = { [key: string]: unknown };
 
-export type GetSuperAnalytics200TopVendorsItem = {
-  [key: string]: unknown;
-};
+export type GetSuperAnalytics200TopVendorsItem = { [key: string]: unknown };
 
 export type GetSuperAnalytics200 = {
   userGrowth?: GetSuperAnalytics200UserGrowthItem[];
@@ -4001,3 +4215,490 @@ export type GetSuperAnalytics200 = {
   revenueGrowth?: GetSuperAnalytics200RevenueGrowthItem[];
   topVendors?: GetSuperAnalytics200TopVendorsItem[];
 };
+
+export type PostVendorOnboardingApplicationBodyBusinessType = typeof PostVendorOnboardingApplicationBodyBusinessType[keyof typeof PostVendorOnboardingApplicationBodyBusinessType];
+
+
+export const PostVendorOnboardingApplicationBodyBusinessType = {
+  INDIVIDUAL: 'INDIVIDUAL',
+  SOLE_PROPRIETORSHIP: 'SOLE_PROPRIETORSHIP',
+  PARTNERSHIP: 'PARTNERSHIP',
+  LIMITED_LIABILITY_COMPANY: 'LIMITED_LIABILITY_COMPANY',
+  CORPORATION: 'CORPORATION',
+  COOPERATIVE: 'COOPERATIVE',
+  OTHER: 'OTHER',
+} as const;
+
+export type PostVendorOnboardingApplicationBodyExpectedMonthlySales = typeof PostVendorOnboardingApplicationBodyExpectedMonthlySales[keyof typeof PostVendorOnboardingApplicationBodyExpectedMonthlySales];
+
+
+export const PostVendorOnboardingApplicationBodyExpectedMonthlySales = {
+  UNDER_1000: 'UNDER_1000',
+  ONE_TO_FIVE_THOUSAND: 'ONE_TO_FIVE_THOUSAND',
+  FIVE_TO_TEN_THOUSAND: 'FIVE_TO_TEN_THOUSAND',
+  TEN_TO_FIFTY_THOUSAND: 'TEN_TO_FIFTY_THOUSAND',
+  FIFTY_TO_HUNDRED_THOUSAND: 'FIFTY_TO_HUNDRED_THOUSAND',
+  OVER_HUNDRED_THOUSAND: 'OVER_HUNDRED_THOUSAND',
+} as const;
+
+/**
+ * @nullable
+ */
+export type PostVendorOnboardingApplicationBodySocialMediaLinks = {
+  /** @nullable */
+  facebook?: string | null;
+  /** @nullable */
+  instagram?: string | null;
+  /** @nullable */
+  twitter?: string | null;
+  /** @nullable */
+  linkedin?: string | null;
+} | null;
+
+export type PostVendorOnboardingApplicationBody = {
+  /**
+   * @minLength 2
+   * @maxLength 100
+   */
+  businessName: string;
+  businessType: PostVendorOnboardingApplicationBodyBusinessType;
+  /**
+   * @minLength 10
+   * @maxLength 1000
+   */
+  businessDescription: string;
+  /**
+   * @minLength 10
+   * @maxLength 200
+   */
+  businessAddress: string;
+  /**
+   * @minLength 10
+   * @maxLength 20
+   */
+  businessPhone: string;
+  /** @nullable */
+  taxIdentification?: string | null;
+  /** @pattern ^GHA-\d{9}-[A-Z]$ */
+  ghanaCardNumber: string;
+  /**
+   * @minLength 2
+   * @maxLength 100
+   */
+  bankName: string;
+  /**
+   * @minLength 10
+   * @maxLength 20
+   */
+  bankAccountNumber: string;
+  /**
+   * @minLength 2
+   * @maxLength 100
+   */
+  bankAccountName: string;
+  /**
+   * @minLength 3
+   * @maxLength 10
+   */
+  bankCode: string;
+  expectedMonthlySales: PostVendorOnboardingApplicationBodyExpectedMonthlySales;
+  /**
+   * @minItems 1
+   * @maxItems 10
+   * @nullable
+   */
+  productCategories?: string[] | null;
+  /** @nullable */
+  socialMediaLinks?: PostVendorOnboardingApplicationBodySocialMediaLinks;
+};
+
+export type PostVendorOnboardingApplication201Application = { [key: string]: unknown };
+
+export type PostVendorOnboardingApplication201 = {
+  message?: string;
+  application?: PostVendorOnboardingApplication201Application;
+};
+
+export type PostVendorOnboardingDocumentsBodyDocumentType = typeof PostVendorOnboardingDocumentsBodyDocumentType[keyof typeof PostVendorOnboardingDocumentsBodyDocumentType];
+
+
+export const PostVendorOnboardingDocumentsBodyDocumentType = {
+  GHANA_CARD: 'GHANA_CARD',
+} as const;
+
+export type PostVendorOnboardingDocumentsBodySide = typeof PostVendorOnboardingDocumentsBodySide[keyof typeof PostVendorOnboardingDocumentsBodySide];
+
+
+export const PostVendorOnboardingDocumentsBodySide = {
+  FRONT: 'FRONT',
+  BACK: 'BACK',
+} as const;
+
+export type PostVendorOnboardingDocumentsBody = {
+  documentType: PostVendorOnboardingDocumentsBodyDocumentType;
+  side: PostVendorOnboardingDocumentsBodySide;
+  /**
+   * @minLength 1
+   * @maxLength 255
+   */
+  fileName: string;
+  fileUrl: string;
+  /** @minimum 1 */
+  fileSize: number;
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
+  mimeType: string;
+};
+
+export type PostVendorOnboardingDocuments201Document = { [key: string]: unknown };
+
+export type PostVendorOnboardingDocuments201 = {
+  message?: string;
+  document?: PostVendorOnboardingDocuments201Document;
+};
+
+/**
+ * @nullable
+ */
+export type GetVendorOnboardingDocuments200DocumentsItemSide = typeof GetVendorOnboardingDocuments200DocumentsItemSide[keyof typeof GetVendorOnboardingDocuments200DocumentsItemSide] | null;
+
+
+export const GetVendorOnboardingDocuments200DocumentsItemSide = {
+  FRONT: 'FRONT',
+  BACK: 'BACK',
+} as const;
+
+export type GetVendorOnboardingDocuments200DocumentsItem = {
+  id?: string;
+  documentType?: string;
+  fileName?: string;
+  fileUrl?: string;
+  fileSize?: number;
+  mimeType?: string;
+  isVerified?: boolean;
+  /** @nullable */
+  verificationNotes?: string | null;
+  uploadedAt?: string;
+  /** @nullable */
+  verifiedAt?: string | null;
+  /** @nullable */
+  verifiedBy?: string | null;
+  applicationId?: string;
+  /** @nullable */
+  side?: GetVendorOnboardingDocuments200DocumentsItemSide;
+};
+
+export type GetVendorOnboardingDocuments200 = {
+  message?: string;
+  documents?: GetVendorOnboardingDocuments200DocumentsItem[];
+};
+
+export type DeleteVendorOnboardingDocumentsDocumentId200 = {
+  message?: string;
+};
+
+export type PostVendorOnboardingUploadUrlBody = {
+  /**
+   * Original filename with extension
+   * @minLength 1
+   */
+  fileName: string;
+  /**
+   * MIME type (must start with image/)
+   * @pattern ^image/
+   */
+  contentType: string;
+  /**
+   * File size in bytes (max 10MB)
+   * @maximum 10485760
+   */
+  fileSize: number;
+};
+
+export type PostVendorOnboardingUploadUrl200 = {
+  /** Presigned URL for uploading the file */
+  uploadUrl: string;
+  /** Public URL where the file will be accessible */
+  fileUrl: string;
+  /** Generated unique filename */
+  fileName: string;
+  /** URL expiration time in seconds */
+  expiresIn: number;
+};
+
+export type GetVendorOnboardingAdminApplicationsParams = {
+/**
+ * Filter by application status
+ */
+status?: GetVendorOnboardingAdminApplicationsStatus;
+/**
+ * Filter by business type
+ */
+businessType?: GetVendorOnboardingAdminApplicationsBusinessType;
+/**
+ * Page number for pagination
+ * @minimum 1
+ */
+page?: number;
+/**
+ * Number of items per page
+ * @minimum 1
+ * @maximum 100
+ */
+limit?: number;
+/**
+ * Search by business name, user email, or Ghana Card number
+ */
+search?: string;
+};
+
+export type GetVendorOnboardingAdminApplicationsStatus = typeof GetVendorOnboardingAdminApplicationsStatus[keyof typeof GetVendorOnboardingAdminApplicationsStatus];
+
+
+export const GetVendorOnboardingAdminApplicationsStatus = {
+  PENDING: 'PENDING',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  DOCUMENTS_REQUESTED: 'DOCUMENTS_REQUESTED',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  SUSPENDED: 'SUSPENDED',
+} as const;
+
+export type GetVendorOnboardingAdminApplicationsBusinessType = typeof GetVendorOnboardingAdminApplicationsBusinessType[keyof typeof GetVendorOnboardingAdminApplicationsBusinessType];
+
+
+export const GetVendorOnboardingAdminApplicationsBusinessType = {
+  INDIVIDUAL: 'INDIVIDUAL',
+  SOLE_PROPRIETORSHIP: 'SOLE_PROPRIETORSHIP',
+  PARTNERSHIP: 'PARTNERSHIP',
+  LIMITED_LIABILITY_COMPANY: 'LIMITED_LIABILITY_COMPANY',
+  CORPORATION: 'CORPORATION',
+  COOPERATIVE: 'COOPERATIVE',
+  OTHER: 'OTHER',
+} as const;
+
+export type GetVendorOnboardingAdminApplications200ApplicationsItem = { [key: string]: unknown };
+
+export type GetVendorOnboardingAdminApplications200Meta = {
+  total?: number;
+  page?: number;
+  limit?: number;
+  totalPages?: number;
+};
+
+export type GetVendorOnboardingAdminApplications200 = {
+  message?: string;
+  applications?: GetVendorOnboardingAdminApplications200ApplicationsItem[];
+  meta?: GetVendorOnboardingAdminApplications200Meta;
+};
+
+/**
+ * Review decision status
+ */
+export type PostVendorOnboardingAdminApplicationsApplicationIdReviewBodyStatus = typeof PostVendorOnboardingAdminApplicationsApplicationIdReviewBodyStatus[keyof typeof PostVendorOnboardingAdminApplicationsApplicationIdReviewBodyStatus];
+
+
+export const PostVendorOnboardingAdminApplicationsApplicationIdReviewBodyStatus = {
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  DOCUMENTS_REQUESTED: 'DOCUMENTS_REQUESTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+} as const;
+
+export type PostVendorOnboardingAdminApplicationsApplicationIdReviewBody = {
+  /** Review decision status */
+  status: PostVendorOnboardingAdminApplicationsApplicationIdReviewBodyStatus;
+  /**
+   * Review notes and comments
+   * @minLength 1
+   * @maxLength 1000
+   */
+  reviewNotes: string;
+  /**
+   * Reason for rejection (required if status is REJECTED)
+   * @minLength 1
+   * @maxLength 500
+   */
+  rejectionReason?: string;
+};
+
+export type PostVendorOnboardingAdminApplicationsApplicationIdReview200Application = { [key: string]: unknown };
+
+export type PostVendorOnboardingAdminApplicationsApplicationIdReview200 = {
+  message?: string;
+  application?: PostVendorOnboardingAdminApplicationsApplicationIdReview200Application;
+};
+
+export type GetVendorOnboardingAdminApplicationsApplicationId200Application = { [key: string]: unknown };
+
+export type GetVendorOnboardingAdminApplicationsApplicationId200 = {
+  message?: string;
+  application?: GetVendorOnboardingAdminApplicationsApplicationId200Application;
+};
+
+export type PutVendorOnboardingAdminApplicationsApplicationIdStatus200Application = { [key: string]: unknown };
+
+export type PutVendorOnboardingAdminApplicationsApplicationIdStatus200 = {
+  message?: string;
+  application?: PutVendorOnboardingAdminApplicationsApplicationIdStatus200Application;
+};
+
+export type PostVendorOnboardingAdminDocumentsDocumentIdVerify200 = {
+  message?: string;
+};
+
+export type GetVendorOnboardingAdminDashboard200DashboardApplicationsByStatusItem = {
+  status?: string;
+  count?: number;
+};
+
+export type GetVendorOnboardingAdminDashboard200DashboardApplicationsByBusinessTypeItem = {
+  businessType?: string;
+  count?: number;
+};
+
+export type GetVendorOnboardingAdminDashboard200DashboardRecentApplicationsItem = { [key: string]: unknown };
+
+export type GetVendorOnboardingAdminDashboard200Dashboard = {
+  totalApplications?: number;
+  pendingApplications?: number;
+  approvedApplications?: number;
+  rejectedApplications?: number;
+  averageProcessingTime?: number;
+  applicationsByStatus?: GetVendorOnboardingAdminDashboard200DashboardApplicationsByStatusItem[];
+  applicationsByBusinessType?: GetVendorOnboardingAdminDashboard200DashboardApplicationsByBusinessTypeItem[];
+  recentApplications?: GetVendorOnboardingAdminDashboard200DashboardRecentApplicationsItem[];
+};
+
+export type GetVendorOnboardingAdminDashboard200 = {
+  message?: string;
+  dashboard?: GetVendorOnboardingAdminDashboard200Dashboard;
+};
+
+export type PostVendorOnboardingAdminCleanupOrphaned200 = {
+  message?: string;
+  cleanedApplications?: number;
+  cleanedDocuments?: number;
+  errors?: string[];
+};
+
+export type DeleteVendorOnboardingAdminApplicationsApplicationIdCleanup200 = {
+  message?: string;
+};
+
+export type GetBankVerificationBanksParams = {
+/**
+ * Country code (default: nigeria)
+ */
+country?: string;
+/**
+ * Number of banks per page
+ * @minimum 1
+ * @maximum 100
+ */
+perPage?: number;
+/**
+ * Filter by active status
+ */
+active?: boolean;
+};
+
+export type GetBankVerificationBanks200BanksItem = {
+  id?: number;
+  name?: string;
+  slug?: string;
+  code?: string;
+  longcode?: string;
+  /** @nullable */
+  gateway?: string | null;
+  pay_with_bank?: boolean;
+  active?: boolean;
+  country?: string;
+  currency?: string;
+  type?: string;
+  is_deleted?: boolean;
+};
+
+export type GetBankVerificationBanks200 = {
+  message?: string;
+  banks?: GetBankVerificationBanks200BanksItem[];
+};
+
+export type PostBankVerificationBanksVerifyBody = {
+  /**
+   * Bank account number (various lengths supported)
+   * @minLength 1
+   * @maxLength 20
+   */
+  accountNumber: string;
+  /**
+   * Bank code from the bank list
+   * @minLength 3
+   * @maxLength 10
+   */
+  bankCode: string;
+};
+
+export type PostBankVerificationBanksVerify200Verification = {
+  account_number?: string;
+  account_name?: string;
+  bank_id?: number;
+};
+
+export type PostBankVerificationBanksVerify200 = {
+  message?: string;
+  verification?: PostBankVerificationBanksVerify200Verification;
+};
+
+export type GetBankVerificationBanksBankCode200Bank = {
+  id?: number;
+  name?: string;
+  slug?: string;
+  code?: string;
+  longcode?: string;
+  /** @nullable */
+  gateway?: string | null;
+  pay_with_bank?: boolean;
+  active?: boolean;
+  country?: string;
+  currency?: string;
+  type?: string;
+  is_deleted?: boolean;
+};
+
+export type GetBankVerificationBanksBankCode200 = {
+  message?: string;
+  bank?: GetBankVerificationBanksBankCode200Bank;
+};
+
+export type GetBankVerificationBanksSearchParams = {
+/**
+ * Search term (bank name or code)
+ * @minLength 2
+ */
+search: string;
+};
+
+export type GetBankVerificationBanksSearch200BanksItem = {
+  id?: number;
+  name?: string;
+  slug?: string;
+  code?: string;
+  longcode?: string;
+  /** @nullable */
+  gateway?: string | null;
+  pay_with_bank?: boolean;
+  active?: boolean;
+  country?: string;
+  currency?: string;
+  type?: string;
+  is_deleted?: boolean;
+};
+
+export type GetBankVerificationBanksSearch200 = {
+  message?: string;
+  banks?: GetBankVerificationBanksSearch200BanksItem[];
+};
+
