@@ -33,6 +33,7 @@ import type {
 
 import type {
   GetVendorOrders200,
+  GetVendorOrdersOrderId200,
   GetVendorOrdersParams,
   GetVendorOrdersStats200,
   GetVendorOrdersStatsParams,
@@ -252,6 +253,85 @@ export function useGetVendorOrdersStats<TData = Awaited<ReturnType<typeof getVen
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getGetVendorOrdersStatsQueryOptions(params,options)
+
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+export const getVendorOrdersOrderId = (
+    orderId: string, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<GetVendorOrdersOrderId200>> => {
+    
+    
+    return axios.get(
+      `http://localhost:4000/vendor/orders/${orderId}`,options
+    );
+  }
+
+
+export const getGetVendorOrdersOrderIdQueryKey = (orderId: string,) => {
+    return [`http://localhost:4000/vendor/orders/${orderId}`] as const;
+    }
+
+    
+export const getGetVendorOrdersOrderIdQueryOptions = <TData = Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError = AxiosError<unknown>>(orderId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError, TData>>, axios?: AxiosRequestConfig}
+) => {
+
+const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetVendorOrdersOrderIdQueryKey(orderId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getVendorOrdersOrderId>>> = ({ signal }) => getVendorOrdersOrderId(orderId, { signal, ...axiosOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(orderId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetVendorOrdersOrderIdQueryResult = NonNullable<Awaited<ReturnType<typeof getVendorOrdersOrderId>>>
+export type GetVendorOrdersOrderIdQueryError = AxiosError<unknown>
+
+
+export function useGetVendorOrdersOrderId<TData = Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError = AxiosError<unknown>>(
+ orderId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getVendorOrdersOrderId>>,
+          TError,
+          Awaited<ReturnType<typeof getVendorOrdersOrderId>>
+        > , 'initialData'
+      >, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetVendorOrdersOrderId<TData = Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError = AxiosError<unknown>>(
+ orderId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getVendorOrdersOrderId>>,
+          TError,
+          Awaited<ReturnType<typeof getVendorOrdersOrderId>>
+        > , 'initialData'
+      >, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetVendorOrdersOrderId<TData = Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError = AxiosError<unknown>>(
+ orderId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError, TData>>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useGetVendorOrdersOrderId<TData = Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError = AxiosError<unknown>>(
+ orderId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getVendorOrdersOrderId>>, TError, TData>>, axios?: AxiosRequestConfig}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetVendorOrdersOrderIdQueryOptions(orderId,options)
 
   const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

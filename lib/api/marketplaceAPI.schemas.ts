@@ -370,6 +370,18 @@ export interface IDParam {
   id: string;
 }
 
+export type InitializePaymentBodyMetadata = {[key: string]: unknown};
+
+export interface InitializePaymentBody {
+  /** @minLength 1 */
+  orderId: string;
+  email: string;
+  /** */
+  amount: number;
+  callbackUrl?: string;
+  metadata?: InitializePaymentBodyMetadata;
+}
+
 export interface LoginBody {
   email: string;
   /** @minLength 8 */
@@ -584,6 +596,8 @@ export const OrderListResponseItemsItemPaymentStatus = {
   CANCELLED: 'CANCELLED',
 } as const;
 
+export type OrderListResponseItemsItemDeliveryZone = string | null;
+
 export type OrderListResponseItemsItemItemsItem = {
   id: string;
   productId: string;
@@ -605,6 +619,7 @@ export type OrderListResponseItemsItem = {
   shipping: number;
   discount: number;
   currency: string;
+  deliveryZone: OrderListResponseItemsItemDeliveryZone;
   items: OrderListResponseItemsItemItemsItem[];
   createdAt: string;
   updatedAt: OrderListResponseItemsItemUpdatedAt;
@@ -646,6 +661,8 @@ export const OrderResponsePaymentStatus = {
   CANCELLED: 'CANCELLED',
 } as const;
 
+export type OrderResponseDeliveryZone = string | null;
+
 export type OrderResponseItemsItem = {
   id: string;
   productId: string;
@@ -667,6 +684,7 @@ export interface OrderResponse {
   shipping: number;
   discount: number;
   currency: string;
+  deliveryZone: OrderResponseDeliveryZone;
   items: OrderResponseItemsItem[];
   createdAt: string;
   updatedAt: OrderResponseUpdatedAt;
@@ -734,6 +752,53 @@ export interface PaginationQuery {
    * @pattern ^\d+$
    */
   limit?: string;
+}
+
+export interface PaymentDetailsResponse {
+  payment?: unknown;
+}
+
+export interface PaymentHistoryQuery {
+  /** Search query */
+  q?: string;
+  /**
+   * 1-based page number
+   * @pattern ^\d+$
+   */
+  page?: string;
+  /**
+   * Number of items per page
+   * @pattern ^\d+$
+   */
+  limit?: string;
+}
+
+export type PaymentHistoryResponsePagination = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+
+export interface PaymentHistoryResponse {
+  payments: unknown[];
+  pagination: PaymentHistoryResponsePagination;
+}
+
+export interface PaymentIdParam {
+  /** Payment ID */
+  paymentId: string;
+}
+
+export interface PaymentResponse {
+  authorizationUrl: string;
+  reference: string;
+}
+
+export interface PaymentVerificationResponse {
+  status: string;
+  order?: unknown;
+  payment?: unknown;
 }
 
 export interface ProductBase {
@@ -952,6 +1017,16 @@ export interface ProductUpdate {
 
 export interface RefreshBody {
   refreshToken: string;
+}
+
+export interface RefundPaymentBody {
+  /** @minLength 1 */
+  reason: string;
+}
+
+export interface RefundResponse {
+  message: string;
+  payment?: unknown;
 }
 
 export type RegisterBodyRole = typeof RegisterBodyRole[keyof typeof RegisterBodyRole];
@@ -1306,6 +1381,15 @@ export interface VendorRatingSchema {
    */
   review?: string;
   categories?: VendorRatingSchemaCategoriesItem[];
+}
+
+export interface VerifyPaymentBody {
+  /** @minLength 1 */
+  reference: string;
+}
+
+export interface WebhookResponse {
+  message: string;
 }
 
 export type PostAuthRegisterBodyRole = typeof PostAuthRegisterBodyRole[keyof typeof PostAuthRegisterBodyRole];
@@ -3332,6 +3416,8 @@ export type PostOrdersBody = {
   storeId: string;
   shippingAddress: PostOrdersBodyShippingAddress;
   billingAddress?: PostOrdersBodyBillingAddress;
+  /** Delivery zone identifier (e.g., A, B, C, etc.) */
+  deliveryZone: string;
   notes?: string;
 };
 
@@ -3348,6 +3434,11 @@ export type PostOrders200Order = {
   status?: string;
   paymentStatus?: string;
   total?: number;
+  /**
+   * Delivery zone identifier
+   * @nullable
+   */
+  deliveryZone?: string | null;
   items?: PostOrders200OrderItemsItem[];
 };
 
@@ -3434,6 +3525,11 @@ export type GetOrdersOrderId200Order = {
   tax?: number;
   shipping?: number;
   currency?: string;
+  /**
+   * Delivery zone identifier
+   * @nullable
+   */
+  deliveryZone?: string | null;
   createdAt?: string;
   items?: GetOrdersOrderId200OrderItemsItem[];
 };
@@ -3519,6 +3615,11 @@ export type GetVendorOrders200OrdersItem = {
   status?: string;
   paymentStatus?: string;
   total?: number;
+  /**
+   * Delivery zone identifier
+   * @nullable
+   */
+  deliveryZone?: string | null;
   customer?: GetVendorOrders200OrdersItemCustomer;
   createdAt?: string;
 };
@@ -3554,6 +3655,51 @@ export type GetVendorOrdersStats200 = {
   totalOrders?: number;
   totalRevenue?: number;
   byStatus?: GetVendorOrdersStats200ByStatusItem[];
+};
+
+export type GetVendorOrdersOrderId200OrderCustomer = {
+  id?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+};
+
+export type GetVendorOrdersOrderId200OrderItemsItemProduct = {
+  id?: string;
+  name?: string;
+  imageUrl?: string;
+};
+
+export type GetVendorOrdersOrderId200OrderItemsItem = {
+  id?: string;
+  productId?: string;
+  quantity?: number;
+  price?: number;
+  total?: number;
+  product?: GetVendorOrdersOrderId200OrderItemsItemProduct;
+};
+
+export type GetVendorOrdersOrderId200Order = {
+  id?: string;
+  status?: string;
+  paymentStatus?: string;
+  total?: number;
+  subtotal?: number;
+  tax?: number;
+  shipping?: number;
+  currency?: string;
+  /**
+   * Delivery zone identifier
+   * @nullable
+   */
+  deliveryZone?: string | null;
+  createdAt?: string;
+  customer?: GetVendorOrdersOrderId200OrderCustomer;
+  items?: GetVendorOrdersOrderId200OrderItemsItem[];
+};
+
+export type GetVendorOrdersOrderId200 = {
+  order?: GetVendorOrdersOrderId200Order;
 };
 
 export type GetCustomerOrdersParams = {
@@ -4700,5 +4846,113 @@ export type GetBankVerificationBanksSearch200BanksItem = {
 export type GetBankVerificationBanksSearch200 = {
   message?: string;
   banks?: GetBankVerificationBanksSearch200BanksItem[];
+};
+
+export type PostPaymentsInitializeBodyMetadata = {[key: string]: unknown};
+
+export type PostPaymentsInitializeBody = {
+  /** @minLength 1 */
+  orderId: string;
+  email: string;
+  /** */
+  amount: number;
+  callbackUrl?: string;
+  metadata?: PostPaymentsInitializeBodyMetadata;
+};
+
+export type PostPaymentsInitialize200 = {
+  authorizationUrl: string;
+  reference: string;
+};
+
+export type PostPaymentsInitialize400 = {
+  message?: string;
+};
+
+export type PostPaymentsVerifyBody = {
+  /** @minLength 1 */
+  reference: string;
+};
+
+export type PostPaymentsVerify200 = {
+  status: string;
+  order?: unknown;
+  payment?: unknown;
+};
+
+export type PostPaymentsVerify400 = {
+  message?: string;
+};
+
+export type GetPaymentsHistoryParams = {
+/**
+ * Search query
+ */
+q?: string;
+/**
+ * 1-based page number
+ * @pattern ^\d+$
+ */
+page?: string;
+/**
+ * Number of items per page
+ * @pattern ^\d+$
+ */
+limit?: string;
+};
+
+export type GetPaymentsHistory200Pagination = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+
+export type GetPaymentsHistory200 = {
+  payments: unknown[];
+  pagination: GetPaymentsHistory200Pagination;
+};
+
+export type GetPaymentsHistory500 = {
+  message?: string;
+};
+
+export type GetPaymentsPaymentId200 = {
+  payment?: unknown;
+};
+
+export type GetPaymentsPaymentId400 = {
+  message?: string;
+};
+
+export type PostPaymentsPaymentIdRefundBody = {
+  /** @minLength 1 */
+  reason: string;
+};
+
+export type PostPaymentsPaymentIdRefund200 = {
+  message: string;
+  payment?: unknown;
+};
+
+export type PostPaymentsPaymentIdRefund400 = {
+  message?: string;
+};
+
+/**
+ * Paystack webhook payload
+ */
+export type PostPaymentsWebhookBody = { [key: string]: unknown };
+
+export type PostPaymentsWebhook200 = {
+  message: string;
+};
+
+export type PostPaymentsWebhook401 = {
+  error?: string;
+};
+
+export type PostPaymentsWebhook500 = {
+  message?: string;
 };
 

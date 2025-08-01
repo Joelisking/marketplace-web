@@ -5,6 +5,7 @@ import {
   FieldValues,
   Path,
   UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
 
 import { FormWizard } from '@/components/form-inputs';
@@ -20,7 +21,7 @@ interface Props<TFieldValues extends FieldValues, TContext> {
   control: Control<TFieldValues, TContext>;
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
-  setValue: (name: Path<TFieldValues>, value: unknown) => void;
+  setValue: UseFormSetValue<TFieldValues>;
   watch: (name: Path<TFieldValues>) => unknown;
   defaultValues?: TFieldValues;
 }

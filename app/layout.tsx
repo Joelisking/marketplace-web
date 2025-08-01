@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import QueryProvider from '@/components/QueryProvider';
+import { CartProvider } from '@/hooks/use-cart-context';
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <CartProvider>{children}</CartProvider>
+        </QueryProvider>
         <Toaster closeButton position="top-right" richColors />
       </body>
     </html>

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useGetProductsId } from '@/lib/api/catalogue/catalogue';
-import { usePostCartItems } from '@/lib/api/cart/cart';
+import { useCartContext } from '@/hooks/use-cart-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,7 +21,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
-import { toast } from 'sonner';
+
 import Link from 'next/link';
 
 export default function ProductPage() {
@@ -39,29 +39,23 @@ export default function ProductPage() {
     error,
   } = useGetProductsId(productId);
 
-  // Add to cart mutation
-  const addToCartMutation = usePostCartItems({
-    mutation: {
-      onSuccess: () => {
-        toast.success('Product added to cart!');
-      },
-      onError: (error) => {
-        toast.error('Failed to add product to cart');
-        console.error('Add to cart error:', error);
-      },
-    },
-  });
+  const { addToCart } = useCartContext();
 
   const product = productData?.data;
 
   // Handle add to cart
-  const handleAddToCart = () => {
-    addToCartMutation.mutate({
-      data: {
-        productId,
-        quantity,
-      },
-    });
+  const handleAddToCart = async () => {
+    if (product) {
+      await addToCart(productId, quantity, {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        imageUrl: product.imageUrl || '/placeholder-product.jpg',
+        vendorName: product.store?.name,
+      });
+    } else {
+      await addToCart(productId, quantity);
+    }
   };
 
   // Format price

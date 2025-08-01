@@ -2,13 +2,14 @@ import React from 'react';
 import { ProductEditForm } from '@/components/vendor/ProductEditForm';
 
 interface EditProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function EditProductPage({
+export default async function EditProductPage({
   params,
 }: EditProductPageProps) {
-  return <ProductEditForm productId={params.id} />;
+  const { id } = await params;
+  return <ProductEditForm productId={id} />;
 }

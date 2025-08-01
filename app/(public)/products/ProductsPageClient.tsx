@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGetProducts } from '@/lib/api/catalogue/catalogue';
-import { usePostCartItems } from '@/lib/api/cart/cart';
+import { useCartContext } from '@/hooks/use-cart-context';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Grid, List } from 'lucide-react';
-import { toast } from 'sonner';
+
 import { ProductCard } from '@/components/ui/product-card';
 import { ProductFilters } from '@/components/ui/product-filters';
 
@@ -73,18 +73,7 @@ export default function ProductsPageClient({
     category: currentCategory || undefined,
   });
 
-  // Add to cart mutation
-  const addToCartMutation = usePostCartItems({
-    mutation: {
-      onSuccess: () => {
-        toast.success('Product added to cart!');
-      },
-      onError: (error) => {
-        toast.error('Failed to add product to cart');
-        console.error('Add to cart error:', error);
-      },
-    },
-  });
+  const { addToCart } = useCartContext();
 
   const products = productsData?.data?.items || [];
   const pagination = productsData?.data?.meta;
@@ -111,16 +100,35 @@ export default function ProductsPageClient({
   };
 
   // Handle add to cart
-  const handleAddToCart = (
+  const handleAddToCart = async (
     productId: string,
-    quantity: number = 1
+    quantity: number = 1,
+    product?: {
+      id: string;
+      name: string;
+      price: number;
+      imageUrl: string;
+      vendorName?: string;
+    }
   ) => {
-    addToCartMutation.mutate({
-      data: {
-        productId,
-        quantity,
-      },
-    });
+    if (product) {
+      await addToCart(productId, quantity, product);
+    } else {
+      // Find the product to get its details
+      const foundProduct = products.find((p) => p.id === productId);
+      if (foundProduct) {
+        await addToCart(productId, quantity, {
+          id: foundProduct.id,
+          name: foundProduct.name,
+          price: foundProduct.price,
+          imageUrl:
+            foundProduct.imageUrl || '/placeholder-product.jpg',
+          vendorName: foundProduct.store?.name,
+        });
+      } else {
+        await addToCart(productId, quantity);
+      }
+    }
   };
 
   // Format price

@@ -27,7 +27,17 @@ interface ProductCardProps {
     };
   };
   viewMode: 'grid' | 'list';
-  onAddToCart: (productId: string, quantity: number) => void;
+  onAddToCart: (
+    productId: string,
+    quantity: number,
+    product?: {
+      id: string;
+      name: string;
+      price: number;
+      imageUrl: string;
+      vendorName?: string;
+    }
+  ) => void;
   formatPrice: (price: number) => string;
   showActions?: boolean;
 }
@@ -107,7 +117,17 @@ export function ProductCard({
                   className="w-20"
                 />
                 <Button
-                  onClick={() => onAddToCart(product.id, quantity)}
+                  onClick={() =>
+                    onAddToCart(product.id, quantity, {
+                      id: product.id,
+                      name: product.name,
+                      price: product.price,
+                      imageUrl:
+                        product.imageUrl ||
+                        '/placeholder-product.jpg',
+                      vendorName: product.store?.name,
+                    })
+                  }
                   disabled={product.stock === 0}
                   className="flex items-center gap-2">
                   <ShoppingCart className="h-4 w-4" />
@@ -212,7 +232,16 @@ export function ProductCard({
               className="w-20"
             />
             <Button
-              onClick={() => onAddToCart(product.id, quantity)}
+              onClick={() =>
+                onAddToCart(product.id, quantity, {
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  imageUrl:
+                    product.imageUrl || '/placeholder-product.jpg',
+                  vendorName: product.store?.name,
+                })
+              }
               disabled={product.stock === 0}
               className="flex-1 flex items-center gap-2">
               <ShoppingCart className="h-4 w-4" />
