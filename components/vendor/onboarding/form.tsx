@@ -20,8 +20,8 @@ interface Props<TFieldValues extends FieldValues, TContext> {
   control: Control<TFieldValues, TContext>;
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
-  setValue: (name: Path<TFieldValues>, value: any) => void;
-  watch: (name: Path<TFieldValues>) => any;
+  setValue: (name: Path<TFieldValues>, value: unknown) => void;
+  watch: (name: Path<TFieldValues>) => unknown;
   defaultValues?: TFieldValues;
 }
 
