@@ -120,12 +120,19 @@ function Login() {
         setRegError(msg);
         setRegSuccess('');
       },
-      onSuccess: () => {
+      onSuccess: (data) => {
         setRegError('');
-        setRegSuccess('Registration successful! You can now log in.');
-        setRegEmail('');
-        setRegPassword('');
-        setRegRole('CUSTOMER');
+        // Save tokens from the response
+        if (data.data?.accessToken && data.data?.refreshToken) {
+          saveTokens(data.data.accessToken, data.data.refreshToken);
+          // Redirect to email verification page
+          router.push(`/verify-email?email=${encodeURIComponent(regEmail)}`);
+        } else {
+          setRegSuccess('Registration successful! You can now log in.');
+          setRegEmail('');
+          setRegPassword('');
+          setRegRole('CUSTOMER');
+        }
       },
     },
   });

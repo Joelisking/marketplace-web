@@ -22,6 +22,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { CheckoutForm } from '@/components/ui/checkout-form';
 import { AuthModal } from '@/components/ui/auth-modal';
+import { PhoneVerificationModal } from '@/components/auth';
 import {
   usePostPaymentsInitialize,
   usePostPaymentsVerify,
@@ -45,6 +46,9 @@ export default function CheckoutPage() {
     'idle' | 'processing' | 'success' | 'failed'
   >('idle');
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [pendingCheckoutData, setPendingCheckoutData] =
+    useState<CheckoutFormData | null>(null);
 
   // Payment mutations
   const initializePaymentMutation = usePostPaymentsInitialize();
@@ -176,7 +180,40 @@ export default function CheckoutPage() {
     } catch (error) {
       setIsLoading(false);
       console.error('Checkout error:', error);
+
+      // Check if error is phone verification required
+      if (
+        error &&
+        typeof error === 'object' &&
+        'response' in error &&
+        error.response &&
+        typeof error.response === 'object' &&
+        'data' in error.response
+      ) {
+        const responseData = error.response.data as {
+          code?: string;
+          message?: string;
+        };
+        if (
+          responseData.code === 'PHONE_NOT_VERIFIED' ||
+          responseData.message?.includes('Phone verification required')
+        ) {
+          // Save checkout data and show phone verification modal
+          setPendingCheckoutData(data);
+          setShowPhoneModal(true);
+          return;
+        }
+      }
+
       toast.error('Failed to initialize payment. Please try again.');
+    }
+  };
+
+  const handlePhoneVerified = () => {
+    // Retry checkout after phone verification
+    if (pendingCheckoutData) {
+      toast.success('Phone verified! Continuing with checkout...');
+      handleCheckout(pendingCheckoutData);
     }
   };
 
@@ -451,6 +488,14 @@ export default function CheckoutPage() {
         onClose={() => setShowAuthModal(false)}
         onSuccess={handleAuthSuccess}
         onAuthStateChange={handleAuthStateChange}
+      />
+
+      {/* Phone Verification Modal */}
+      <PhoneVerificationModal
+        isOpen={showPhoneModal}
+        onClose={() => setShowPhoneModal(false)}
+        onSuccess={handlePhoneVerified}
+        userPhone={user?.phone as string | undefined}
       />
     </>
   );
