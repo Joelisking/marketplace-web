@@ -94,10 +94,20 @@ export function AuthModal({
 
   const registerMutation = usePostAuthRegister({
     mutation: {
-      onSuccess: () => {
-        toast.success('Registration successful! Please log in.');
-        setIsLogin(true);
+      onSuccess: (response) => {
+        const { accessToken, refreshToken, user } = response.data;
+
+        // Save tokens
+        if (accessToken && refreshToken) {
+          saveTokens(accessToken, refreshToken);
+        }
+
+        toast.success('Registration successful! Please verify your email.');
         registerForm.reset();
+        onClose();
+
+        // Redirect to email verification
+        window.location.href = `/verify-email?email=${encodeURIComponent(user.email)}`;
       },
       onError: (error) => {
         toast.error('Registration failed. Please try again.');

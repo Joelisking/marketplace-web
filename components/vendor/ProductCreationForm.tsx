@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/use-auth';
 import { usePostProducts } from '@/lib/api/catalogue/catalogue';
 import { usePostUploadPresignedUrl } from '@/lib/api/upload/upload';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ import {
 } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
+import { PhoneVerificationModal } from '@/components/auth';
 import { toast } from 'sonner';
 import { Loader2, Upload, X } from 'lucide-react';
 import type { PostProductsBodyImagesItem } from '@/lib/api/marketplaceAPI.schemas';
@@ -37,6 +39,7 @@ interface UploadedImage {
 
 export function ProductCreationForm() {
   const router = useRouter();
+  const { user } = useAuth();
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     price: '',
@@ -47,6 +50,8 @@ export function ProductCreationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [pendingProductData, setPendingProductData] = useState<any>(null);
 
   const createProductMutation = usePostProducts();
   const uploadUrlMutation = usePostUploadPresignedUrl();
@@ -157,6 +162,55 @@ export function ProductCreationForm() {
     }
   };
 
+  const createProduct = async (productData: any) => {
+    try {
+      await createProductMutation.mutateAsync({
+        data: productData,
+      });
+
+      setProgress(100);
+      toast.success('Product created successfully!');
+
+      // Redirect to the new product or products list
+      router.push('/vendor/products');
+    } catch (error: any) {
+      console.error('Product creation failed:', error);
+
+      // Check if error is phone verification required
+      if (
+        error &&
+        typeof error === 'object' &&
+        'response' in error &&
+        error.response &&
+        typeof error.response === 'object' &&
+        'data' in error.response
+      ) {
+        const responseData = error.response.data as {
+          code?: string;
+          message?: string;
+        };
+        if (
+          responseData.code === 'PHONE_NOT_VERIFIED' ||
+          responseData.code === 'PHONE_NOT_SET' ||
+          responseData.message?.includes('Phone verification required') ||
+          responseData.message?.includes('Phone number required')
+        ) {
+          // Save product data and show phone verification modal
+          setPendingProductData(productData);
+          setShowPhoneModal(true);
+          return;
+        }
+      }
+
+      const errorMessage =
+        error.response?.data?.message || 'Failed to create product';
+      toast.error(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+      setProgress(0);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -198,23 +252,20 @@ export function ProductCreationForm() {
         images: uploadedImages,
       };
 
-      await createProductMutation.mutateAsync({
-        data: productData,
-      });
-
-      setProgress(100);
-      toast.success('Product created successfully!');
-
-      // Redirect to the new product or products list
-      router.push('/vendor/products');
+      await createProduct(productData);
     } catch (error: any) {
-      console.error('Product creation failed:', error);
-      const errorMessage =
-        error.response?.data?.message || 'Failed to create product';
-      toast.error(errorMessage);
-    } finally {
+      console.error('Product creation error:', error);
       setIsSubmitting(false);
       setProgress(0);
+    }
+  };
+
+  const handlePhoneVerified = () => {
+    // Retry product creation after phone verification
+    if (pendingProductData) {
+      toast.success('Phone verified! Creating product...');
+      setProgress(80);
+      createProduct(pendingProductData);
     }
   };
 
@@ -417,6 +468,14 @@ export function ProductCreationForm() {
           </form>
         </CardContent>
       </Card>
+
+      {/* Phone Verification Modal */}
+      <PhoneVerificationModal
+        isOpen={showPhoneModal}
+        onClose={() => setShowPhoneModal(false)}
+        onSuccess={handlePhoneVerified}
+        userPhone={user?.phone as string | undefined}
+      />
     </div>
   );
 }

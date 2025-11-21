@@ -32,6 +32,10 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useState<{
     role: string;
+    email?: string;
+    phone?: string | null;
+    emailVerified?: boolean;
+    phoneVerified?: boolean;
     [key: string]: unknown;
   } | null>(null);
 
@@ -53,6 +57,14 @@ export const useAuth = () => {
     };
 
     checkAuth();
+
+    // Listen for storage changes (e.g., token updates from other tabs)
+    const handleStorageChange = () => {
+      checkAuth();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const logout = () => {
@@ -61,10 +73,22 @@ export const useAuth = () => {
     setUser(null);
   };
 
+  const refreshUserData = () => {
+    const accessToken = getAccessToken();
+    if (accessToken) {
+      const userInfo = decodeJwtPayload(accessToken);
+      setUser(userInfo);
+    }
+  };
+
   return {
     isAuthenticated,
     isLoading,
     user,
     logout,
+    refreshUserData,
+    // Convenience flags
+    isEmailVerified: user?.emailVerified || false,
+    isPhoneVerified: user?.phoneVerified || false,
   };
 };
